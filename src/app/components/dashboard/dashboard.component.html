@@ -1,0 +1,50 @@
+<div class="backcontainer" fxLayout="column" fxLayoutAlign="start none">
+  <mat-toolbar style="background-color: #a03037;">
+    <mat-toolbar-row>
+      <!--------------- bookimg and book --------------------------->
+      <div style="height: 40%; margin-left: 10%;">
+        <mat-icon class="bookicon">
+          <img class="bookimg" src="assets/images/education@2x.png" />
+        </mat-icon>
+        <div class="booktext">BookStore</div>
+      </div>
+      <!-------------------- search ------------------->
+      <div class="searche">
+        <img class="scicon" src="assets/images/searchicon.png" />
+        <input type="text" class="searchinput" placeholder="search.." />
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start end" style="margin-left: 23%;">
+        <div class="carttext" (click)="onCart()">Cart</div>
+        <button (click)="onCart()" class="cartimg">
+          <mat-icon color="primary">
+            <img class="image" src="assets/images/supermarket@2x.png" />
+          </mat-icon>
+        </button>
+
+        <button
+          mat-icon-button
+          fxShow="true"
+          width="30"
+          style="margin-left: 20%;"
+          [matMenuTriggerFor]="beforeMenu"
+        >
+          <img class="profile" src="assets/images/Indian-Army-4.jpg" />
+        </button>
+
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+          <button mat-menu-item>Item 1</button>
+          <button mat-menu-item>Item 2</button>
+        </mat-menu>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-sidenav-container>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+<mat-card-footer class="footer">
+  <app-footer></app-footer>
+</mat-card-footer>

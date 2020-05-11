@@ -1,0 +1,49 @@
+.book {
+  padding-bottom: 10px;
+  flex-direction: row;
+  padding: 10px;
+}
+.bookheader {
+  flex-direction: row;
+  padding-bottom: 2%;
+  margin-left: 11.4%;
+  margin-right: 10.2%;
+}
+.sort {
+  text-align: center;
+  font-size: 12px;
+  width: 161px;
+  height: 30px;
+  font: Regular 12px/15px Lato;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 1px solid #837070;
+  border-radius: 2px;
+  opacity: 1;
+  margin-right: -4.5px;
+}
+#menu:hover {
+  visibility: visible;
+  transition-delay: 0s;
+}
+div.myMenu {
+  border-radius: 0px;
+  border: 1px solid #e2e2e2;
+  background-color: #ffffff 0% 0% no-repeat padding-box;
+}
+// card fitting to page
+.display-notes {
+  position: relative;
+  flex-wrap: wrap;
+  padding: 10px;
+  display: block;
+  justify-content: center;
+  align-items: flex-start;
+  float: left;
+}
+app-books {
+  padding: 10px, 10px;
+}
+#first {
+  position: relative;
+  display: block;
+}

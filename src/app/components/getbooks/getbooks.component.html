@@ -1,0 +1,78 @@
+<mat-card-content>
+  <div fxLayout="row" fxLayoutAlign="space-between end" class="bookheader">
+    <div style="font-size: 25px;" class="books">
+      Books <small style="font-size: 12px;">(128 itmes)</small>
+    </div>
+    <div>
+      <button
+        class="sort"
+        fxLayout="row"
+        fxLayoutAlign="space-between end"
+        [matMenuTriggerFor]="menu"
+      >
+        <div
+          style="font-size: 12px; padding-bottom: 5%;"
+          (click)="doSorting(sort)"
+        >
+          <label>{{ sort }}</label>
+        </div>
+        <div>
+          <mat-icon style="color: #0a0102; opacity: 0.75;"
+            >expand_more</mat-icon
+          >
+        </div>
+      </button>
+      <mat-menu #menu="matMenu" class="myMenu">
+        <div
+          style="
+            width: 151px;
+            height: auto;
+            text-align: left;
+            padding-left: 8px;
+          "
+        >
+          <div
+            style="font-size: 12px; padding-bottom: 5%;"
+            (click)="doSorting(sortTech1)"
+          >
+            <label>{{ sortTech1 }}</label>
+          </div>
+          <div
+            style="font-size: 12px; padding-bottom: 5%;"
+            (click)="doSorting(sortTech2)"
+          >
+            <label>{{ sortTech2 }}</label>
+          </div>
+          <div
+            style="font-size: 12px; padding-bottom: 5%;"
+            (click)="doSorting(sortTech3)"
+          >
+            <label>{{ sortTech3 }}</label>
+          </div>
+        </div>
+      </mat-menu>
+    </div>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <div *ngFor="let colors of images" fxLayout="row" class="display-notes">
+      <div
+        *ngFor="
+          let image of colors
+            | paginate: { itemsPerPage: 8, currentPage: page, id: 'first' }
+        "
+        class="colorsList"
+        class="book"
+      >
+        <app-books [image]="image"></app-books>
+      </div>
+    </div>
+    <div class="paginator">
+      <pagination-controls
+        (pageChange)="page = $event"
+        id="first"
+        align="center"
+      >
+      </pagination-controls>
+    </div>
+  </div>
+</mat-card-content>

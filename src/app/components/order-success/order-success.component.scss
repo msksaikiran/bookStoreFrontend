@@ -1,0 +1,47 @@
+.sucessimg {
+  display: flex;
+  position: relative;
+  top: 36px;
+  //left: 177px;
+  flex-direction: column;
+  flex-wrap: wrap;
+  // margin-bottom: 170px;
+  height: 225px;
+  width: 170px;
+  margin-right: 3%;
+}
+.ordermsg {
+  font: Bold 23px/30px Lato;
+  text-transform: capitalize;
+  opacity: 1;
+  margin-top: -60px;
+}
+.orderdetails {
+  text-align: center;
+  width: 348px;
+  letter-spacing: 0px;
+  color: #333232;
+  opacity: 1;
+  margin-top: 100px;
+  margin-bottom: 2px;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 84%;
+  color: #333232;
+  font-size: 12px;
+  margin: auto;
+  margin-bottom: 40px;
+}
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 16px;
+  width: 22.22%;
+}
+tr:nth-child(odd) {
+  background-color: #dcdcdc;
+}
