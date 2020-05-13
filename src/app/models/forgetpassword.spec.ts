@@ -1,7 +1,7 @@
-import { Forgetpassword } from './forgetpassword';
+import { ForgotPassword } from "./forgetpassword";
 
-describe('Forgetpassword', () => {
-  it('should create an instance', () => {
-    expect(new Forgetpassword()).toBeTruthy();
+describe("Forgetpassword", () => {
+  it("should create an instance", () => {
+    expect(new ForgotPassword()).toBeTruthy();
   });
 });

@@ -13,7 +13,7 @@ mat-card-header {
   margin-left: -16px;
 }
 mat-card-actions {
-  padding-top: 9px;
+  padding-top: 6px;
 }
 mat-card-content {
   margin-right: -10px;
@@ -30,12 +30,12 @@ img {
   box-shadow: 0 0 8px 8px #fff inset;
 }
 .mat-title {
-  margin-bottom: 2px;
-  line-height: 2.8;
+  padding-bottom: 2px;
+  line-height: 1.8;
   color: #0a0102;
-  margin-top: 12px;
+  padding-top: 7px;
   opacity: 1;
-  font: Regular 14px/17px Lato;
+  font-size: 16px;
 }
 button {
   width: 100%;
@@ -55,7 +55,15 @@ button {
   position: relative;
   margin: 0px;
   margin-left: 4px;
+  padding-top: -8px;
   font: Bold 12px/15px Lato;
+}
+.mat-subheading-2 {
+  position: relative;
+  margin: 0px;
+  margin-left: 4px;
+  padding-top: 6px;
+  font: 14px/15px Lato;
 }
 .box1 {
   font-size: 11px;
@@ -148,4 +156,16 @@ button {
   background-color: white;
   width: 191px;
   height: 30px;
+}
+::ng-deep .custom-tooltip {
+  width: 456px;
+  height: 208px;
+  text-align: left;
+  font: Regular 11px/13px Lato !important;
+  letter-spacing: 0px;
+  font-size: 12px;
+  border: #5e3e3e !important;
+  border-radius: 2px;
+  background-color: rgba(250, 246, 246, 0.932);
+  color: #0a0102 !important;
 }

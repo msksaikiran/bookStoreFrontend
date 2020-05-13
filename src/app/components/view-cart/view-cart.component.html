@@ -1,45 +1,55 @@
 <div role="combobox" flex="column" style="margin-left: 16%;">
   <mat-card class="matcard1" [ngClass]="open == true ? 'matcardincr' : 'dummy'">
-    <div class="mycart">
-      My cart&nbsp;(2)
-    </div>
-    <!-- <div *ngFor="let image of images"> -->
-    <div class="cartdetails" fxLayout="row" fxLayoutAlign="start start">
-      <img class="bookimg" src="assets/images/Image 11@2x.png" />
-      <div class="bookdetails">
-        <div class="booktitle">
-          Don't Make Me Think
+    <div class="mycart">My cart&nbsp;({{ bookincart }})</div>
+    <!-- <div *ngFor="let cart of books"> -->
+    <div *ngFor="let book of myDatas">
+      <div *ngIf="book.bookName != null">
+        <div class="cartdetails" fxLayout="row" fxLayoutAlign="start start">
+          <!-- "assets/images/Image 11@2x.png" -->
+          <img class="bookimg" src="assets/images/Image 11@2x.png" />
+          <div class="bookdetails">
+            <div class="booktitle">
+              <!-- Don't Make Me Think -->
+              {{ book.bookName }}
+            </div>
+            <!-- <div class="subtitle" fxLayout="column" fxLayoutAlign="center start"> -->
+            <div class="sub">{{ book.bookAuthor }}</div>
+            <div style="margin-bottom: 30px; font: Bold 18px/15px Lato;">
+              Rs. {{ book.bookPrice }}
+            </div>
+          </div>
         </div>
-        <!-- <div class="subtitle" fxLayout="column" fxLayoutAlign="center start"> -->
-        <div class="sub">by Steve Krug</div>
-        <div style="margin-bottom: 30px; font: Bold 18px/15px Lato;">
-          Rs. 1500
-        </div>
-        <!-- </div> -->
-        <!-- </div> -->
-      </div>
-    </div>
-    <div
-      fxLayout="row"
-      fxLayoutAlign="center center"
-      fxLayOutGap="10px"
-      style="margin-right: 268px; margin-bottom: 20px;"
-    >
-      <div>
-        <button mat-icon-button (click)="personadd()">
-          <mat-icon>remove_circle_outline</mat-icon>
-        </button>
-      </div>
 
-      <div class="quantity">{{ 1 }}</div>
-      <div>
-        <button mat-icon-button (click)="personadd()">
-          <mat-icon>add_circle_outline</mat-icon>
-        </button>
+        <div
+          fxLayout="row"
+          fxLayoutAlign="center center"
+          fxLayOutGap="10px"
+          style="margin-right: 280px; margin-bottom: 20px;"
+        >
+          <div>
+            <button mat-icon-button (click)="ondescQuantity(book)">
+              <mat-icon>remove_circle_outline</mat-icon>
+            </button>
+          </div>
+          <div *ngFor="let quaty of book.quantitybto">
+            <div class="quantity">{{ quaty.quantityOfBook }}</div>
+          </div>
+          <div>
+            <button mat-icon-button (click)="onQuantity(book)">
+              <mat-icon>add_circle_outline</mat-icon>
+            </button>
+          </div>
+          <button
+            (click)="onRemove(book)"
+            style="background-color: white; border: none; outline: none;"
+          >
+            <div style="font: 18px/15px Lato;">&nbsp; Remove</div>
+          </button>
+        </div>
       </div>
-      <div style="font: 18px/15px Lato;">&nbsp; Remove</div>
     </div>
     <!-- </div> -->
+    <!----- end of for ----------->
     <div fxLayout="column" fxLayoutAlign="end end">
       <button mat-raised-button class="button" (click)="onOpen()" *ngIf="!open">
         Place order
@@ -79,7 +89,7 @@
             matInput
             placeholder="Enter your Name"
             required
-            [(ngModel)]="login.email"
+            [(ngModel)]="addModel.name"
             [disabled]="!fields"
           />
         </mat-form-field>
@@ -94,7 +104,7 @@
               matInput
               placeholder="Enter your phoneNumber"
               required
-              [matAutocomplete]="false"
+              [(ngModel)]="addModel.phoneNumber"
               [disabled]="!fields"
               autocomplete="off"
             />
@@ -114,7 +124,7 @@
             matInput
             placeholder="Enter your pincode"
             required
-            [matAutocomplete]="false"
+            [(ngModel)]="addModel.pincode"
             [disabled]="!fields"
             autocomplete="off"
           />
@@ -131,15 +141,14 @@
               matInput
               placeholder="Enter your Locality"
               required
-              [matAutocomplete]="false"
+              [(ngModel)]="addModel.locality"
               [disabled]="!fields"
               autocomplete="off"
             />
           </mat-form-field>
         </div>
       </div>
-      <!-- </div> -->
-      <!-- <div class="addiv"> -->
+
       <!-------------------------------- address ------------------------------------------>
       <mat-form-field appearance="outline" class="address">
         <mat-label>Address</mat-label>
@@ -151,7 +160,7 @@
           matInput
           placeholder="Address"
           required
-          [matAutocomplete]="false"
+          [(ngModel)]="addModel.address"
           [disabled]="!fields"
           style="height: 51px;"
           autocomplete="off"
@@ -175,7 +184,7 @@
             matInput
             placeholder="Enter your city/town"
             required
-            [matAutocomplete]="false"
+            [(ngModel)]="addModel.city"
             [disabled]="!fields"
             autocomplete="off"
           />
@@ -192,7 +201,7 @@
               matInput
               placeholder="Enter your landmark"
               required
-              [matAutocomplete]="false"
+              [(ngModel)]="addModel.landmark"
               [disabled]="!fields"
               autocomplete="off"
             />
@@ -235,26 +244,27 @@
   </mat-card>
 
   <mat-card class="matcard2" *ngIf="open2">
-    <div class="mycart">
-      My cart&nbsp;(2)
-    </div>
-    <!-- <div *ngFor="let image of images"> -->
-    <div class="cartdetails" fxLayout="row" fxLayoutAlign="start start">
-      <img class="bookimg" src="assets/images/Image 11@2x.png" />
-      <div class="bookdetails">
-        <div class="booktitle">
-          Don't Make Me Think
+    <div class="mycart">My cart&nbsp;({{ bookincart }})</div>
+
+    <div *ngFor="let book of myDatas">
+      <div *ngIf="book.bookName != null">
+        <div class="cartdetails" fxLayout="row" fxLayoutAlign="start start">
+          <img class="bookimg" src="assets/images/Image 11@2x.png" />
+          <!-- <img class="bookimg" src="{{ book.bookImage }}" /> -->
+          <div class="bookdetails">
+            <div class="booktitle">
+              <!-- Don't Make Me Think -->
+              {{ book.bookName }}
+            </div>
+
+            <div class="sub">{{ book.bookAuthor }}</div>
+            <div style="font: Bold 18px/15px Lato; margin-bottom: 30px;">
+              Rs. {{ book.bookPrice }}
+            </div>
+          </div>
         </div>
-        <!-- <div class="subtitle" fxLayout="column" fxLayoutAlign="center start"> -->
-        <div class="sub">by Steve Krug</div>
-        <div style="font: Bold 18px/15px Lato; margin-bottom: 30px;">
-          Rs. 1500
-        </div>
-        <!-- </div> -->
-        <!-- </div> -->
       </div>
     </div>
-    <!-- </div> -->
     <div fxLayout="column" fxLayoutAlign="end end">
       <button mat-raised-button class="button" (click)="onCheckOut()">
         Checkout
@@ -262,4 +272,7 @@
     </div>
   </mat-card>
   <br /><br />
+</div>
+<div>
+  <app-footer></app-footer>
 </div>

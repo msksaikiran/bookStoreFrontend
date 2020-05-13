@@ -1,13 +1,14 @@
 <mat-card-content>
   <div fxLayout="row" fxLayoutAlign="space-between end" class="bookheader">
     <div style="font-size: 25px;" class="books">
-      Books <small style="font-size: 12px;">(128 itmes)</small>
+      Books
+      <small style="font-size: 12px;">( {{ length }} itmes)</small>
     </div>
     <div>
       <button
         class="sort"
         fxLayout="row"
-        fxLayoutAlign="space-between end"
+        fxLayoutAlign="space-between center"
         [matMenuTriggerFor]="menu"
       >
         <div
@@ -54,25 +55,52 @@
     </div>
   </div>
   <div fxLayout="column" fxLayoutAlign="center center">
-    <div *ngFor="let colors of images" fxLayout="row" class="display-notes">
-      <div
-        *ngFor="
-          let image of colors
-            | paginate: { itemsPerPage: 8, currentPage: page, id: 'first' }
-        "
-        class="colorsList"
-        class="book"
-      >
-        <app-books [image]="image"></app-books>
+    <div fxLayout="row" class="display-notes">
+      <div *ngFor="let book of bookList" class="book">
+        <app-books [book]="book"></app-books>
       </div>
     </div>
-    <div class="paginator">
-      <pagination-controls
-        (pageChange)="page = $event"
-        id="first"
-        align="center"
-      >
-      </pagination-controls>
+    <div class="paginator" style="padding-bottom: 10px;">
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <div>
+          <button
+            mat-mini-fab
+            [disabled]="page < 2"
+            (click)="previousPage()"
+            style="
+              border: #e2e2e2;
+              background: #ffffff 0% 0% no-repeat padding-box;
+              color: #0a0102;
+            "
+          >
+            <mat-icon>navigate_before</mat-icon>
+          </button>
+        </div>
+        <div class="pagenumber" fxLayout="row">
+          <div *ngFor="let page of pages">
+            <button mat-icon-button (click)="getAvailableBooksOfPage(page)">
+              {{ page }}
+            </button>
+          </div>
+        </div>
+        <div>
+          <button
+            [disabled]="page > 1"
+            (click)="nextPage()"
+            mat-mini-fab
+            style="
+              border: #e2e2e2;
+              background: #ffffff 0% 0% no-repeat padding-box;
+              color: #0a0102;
+            "
+          >
+            <mat-icon>navigate_next</mat-icon>
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
+  <div class="footer">
+    <app-footer></app-footer>
   </div>
 </mat-card-content>

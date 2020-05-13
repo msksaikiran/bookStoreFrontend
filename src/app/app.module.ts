@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
   MatInputModule,
   MatSnackBarModule,
+  MatTooltipModule,
   MatNavList,
 } from "@angular/material";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -46,6 +47,10 @@ import { RestpasswordComponent } from "./components/restpassword/restpassword.co
 import { MatRadioModule } from "@angular/material/radio";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { NgxSpinnerModule } from "ngx-spinner";
+
+import { WhishlistComponent } from "./components/whishlist/whishlist.component";
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,6 +66,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     SortBooksPipe,
     ForgetpasswordComponent,
     RestpasswordComponent,
+    WhishlistComponent,
+    OrderDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,7 +95,9 @@ import { NgxSpinnerModule } from "ngx-spinner";
     BrowserAnimationsModule,
     MatProgressBarModule,
     MatRadioModule,
+    MatTooltipModule,
     MatAutocompleteModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

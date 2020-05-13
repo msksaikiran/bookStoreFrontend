@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, Validators, FormBuilder } from '@angular/forms';
 import { User } from 'src/app/models/user';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatRadioChange, MatRadioButton } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
+import { HttpService } from 'src/app/service/http.service';
 
 @Component({
   selector: 'app-register',
@@ -11,18 +12,22 @@ import { NgxSpinnerService } from "ngx-spinner";
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+ 
   user: User = new User();
-
+nam=new FormControl('', );
   name = new FormControl(this.user.name, [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-Z ]*')]);
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl(this.user.password, [Validators.required, Validators.minLength(8), Validators.maxLength(15)])
-  mobile = new FormControl(this.user.phoneNumber, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]);
+  mobile = new FormControl(this.user.mobile, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]);
   showSpinner = false;
+  person=String;
   constructor(private snackBar: MatSnackBar, 
     public formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router) { }
-    private spinner: NgxSpinnerService
+    private router: Router,
+    private spinner: NgxSpinnerService,
+    private httpservice:HttpService) { }
+    
   ngOnInit() {
     
   }
@@ -44,27 +49,41 @@ export class RegisterComponent implements OnInit {
     return this.password.hasError('required') ? 'You must enter a value' :
       this.password.hasError('password') ? 'Min 6 Elements' : '';
   }
-onSubmit()
+  onChange(mrChange: MatRadioChange) {
+    console.log(mrChange.value);
+   this.person=mrChange.value
+  }
+  onRegister()
 {
+  console.log("==========");
+  console.log(this.person);
+  this.showSpinner=true;
   console.log(this.user)
-  
-  console.log(this.password)
-localStorage.setItem("name",this.user.name)
-localStorage.setItem("emailId",this.user.emailId)
-localStorage.setItem("password",this.user.password)
-localStorage.setItem("phoneNumber",this.user.phoneNumber)
-// this.spinner.show();
+  this.spinner.show();
+    console.log(this.password)
 
-        this.snackBar.open(
-          "Registered Successfully",
-          "undo",
-          { duration: 5000 }
-        )
-       
-        this.router.navigate(['/login'])
-      
+    this.httpservice.postRequest(this.person+"/registration", this.user).subscribe(
+      (response: any) => {
+        if (response!=null) {
+          console.log(response);
+          this.spinner.hide();
+          this.snackBar.open(
+            "Registered Successfully",
+            "undo",
+            { duration: 3000 }
+          )
+          this.router.navigate(['/login'])
+        } else {
+          console.log(response);
+          this.snackBar.open(
+            "Registration Failed",
+            "undo",
+            { duration: 2500 }
+          )
+        }
+
+      }
+    )
+  }
 }
 
-
-
-}

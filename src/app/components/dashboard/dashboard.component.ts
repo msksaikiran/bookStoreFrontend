@@ -9,9 +9,26 @@ import { ActivatedRoute, Router } from "@angular/router";
 export class DashboardComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) {}
 
-  ngOnInit() {}
+  visible: boolean;
+  ngOnInit() {
+    if (localStorage.getItem("token") != null) {
+      this.visible = true;
+    }
+  }
 
   onCart() {
-    this.router.navigate(["/viewcart"]);
+    this.router.navigate(["books/viewcart"]);
+  }
+  onwhishlist() {
+    this.router.navigate(["books/whishlist"]);
+  }
+  onOrderDetails() {
+    this.router.navigate(["books/orderdetails"]);
+  }
+  onLogin() {
+    this.router.navigate(["login"]);
+  }
+  onLogout() {
+    this.router.navigate(["books/orderdetails"]);
   }
 }

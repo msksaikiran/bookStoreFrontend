@@ -81,12 +81,15 @@ html,body
 }
 .login-wrapper .btn-block3{
     font-size: 18px;
-    text-align: center;
-    color: white;
-    background-color:#A03037;
-    border-radius: 3px;
-    border: none;
-    opacity: 1; 
+    // text-align: center;
+    color:#A03037;
+    // background-color:#A03037;
+    // border-radius: 3px;
+    // border: none;
+    // opacity: 1; 
+    // margin-bottom: 40px;
+    // margin-left: 177px;
+    
    
 }
 .login-wrapper mat-card-header{
@@ -156,12 +159,12 @@ html,body
 // }
 
 ::ng-deep {
-    $custom-main-color: #A03037;
+    $custom-main-color: red;
     $custom-label-color: rgba(0, 0, 0, .6);
  
     // mat-icon-stepper selected color change
     .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
-       background-color: green !important;
+       background-color: #A03037 !important;
     }
  
     // input outline color
@@ -171,7 +174,7 @@ html,body
  
     // mat-input focused color
     .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
-       color: green !important;
+       color: #A03037 !important;
     }
  
     // mat-input error outline color
@@ -197,7 +200,7 @@ html,body
  
     // mat-label focused style
     .mat-form-field.mat-focused .mat-form-field-label {
-       color: green !important;
+       color: #0a0102 !important;
     }
  
     // mat-label error style
@@ -209,4 +212,7 @@ html,body
         margin-top: 40;
         
     }
-    .grab {cursor: -webkit-grab; cursor: grab;}
+    .grab {
+        cursor:-webkit-grab;
+        cursor:grab;
+    }

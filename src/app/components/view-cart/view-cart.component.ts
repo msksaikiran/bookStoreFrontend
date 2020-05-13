@@ -3,6 +3,15 @@ import { FormControl, Validators } from "@angular/forms";
 import { NgxSpinnerService } from "ngx-spinner";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Login } from "src/app/models/login";
+import { Address } from "src/app/models/address";
+import { MatSnackBar } from "@angular/material";
+import { ViewcartService } from "src/app/service/viewcart.service";
+import { Book } from "src/app/models/book";
+import { AddressService } from "src/app/service/address.service";
+import { Cartdetails } from "src/app/models/cartdetails";
+import { DataService } from "src/app/service/data.service";
+import { Subject, BehaviorSubject } from "rxjs";
+import { tap } from "rxjs/operators";
 
 @Component({
   selector: "app-view-cart",
@@ -10,9 +19,8 @@ import { Login } from "src/app/models/login";
   styleUrls: ["./view-cart.component.scss"],
 })
 export class ViewCartComponent implements OnInit {
-  images = [{}, {}, {}, {}];
+  // images = [{}, {}, {}, {}];
   image: "assets/images/Image 11@2x.png";
-  login: Login = new Login("", "");
 
   name = new FormControl([
     Validators.required,
@@ -80,13 +88,171 @@ export class ViewCartComponent implements OnInit {
   constructor(
     private spinner: NgxSpinnerService,
     private route: ActivatedRoute,
-    private router: Router
+
+    private router: Router,
+    private snackbar: MatSnackBar,
+    private cartService: ViewcartService,
+    private data: DataService,
+    private addressService: AddressService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    localStorage.setItem(
+      "token",
+      "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIn0.aG9tbKceX39kDuT9h9PWP9FTqOqGU6C3PYRi_dW_gH8Al9cGEX8EzAQ3h8KLxa7boufpdfZ23XUuAKc-zovsQg"
+    );
+    this.getcountofbooks();
+    this.getbooks();
+  }
+
+  // private subject = new Subject<any>();
+  book: Book = new Book();
+  //
+  books: [];
+  token: string;
+
+  quantitylist: [];
+
+  bookincart: number;
+  myDatas = new Array();
+
+  getcountofbooks() {
+    this.token = localStorage.getItem("token");
+    this.cartService.getRequest("cart/bookCount/" + this.token).subscribe(
+      (Response: any) => {
+        console.log(Response);
+        this.bookincart = Response.obj;
+      },
+      (error: any) => {
+        console.error(error);
+        console.log(error.error.message);
+        this.snackbar.open(error.error.message, "undo", { duration: 2500 });
+      }
+    );
+  }
+
+  getbooks() {
+    this.token = localStorage.getItem("token");
+    this.cartService.getRequest("cart/get_cart/" + this.token).subscribe(
+      (Response: any) => {
+        console.log(Response);
+        this.books = Response.obj;
+
+        //this.bookincart = Response.obj.length;
+        console.log(this.books);
+        for (var len in Response.obj) {
+          this.books = Response.obj[len];
+          let res = this.books["booksList"];
+          let qt = this.books["quantityOfBooks"];
+          console.log(this.books["cartId"]);
+          console.log(this.myDatas);
+          /**
+           * bookdetails
+           */
+          for (var index in res) {
+            this.book = res[0]; //book details
+            this.quantitylist = this.books["quantityOfBooks"];
+            this.book.quantitybto = this.books["quantityOfBooks"];
+            this.myDatas.push(this.book);
+          }
+        }
+        console.log(this.myDatas);
+        this.snackbar.open(Response.message, "undo", { duration: 2500 });
+      },
+      (error: any) => {
+        console.error(error);
+        console.log(error.error.message);
+        this.snackbar.open(error.error.message, "undo", { duration: 2500 });
+      }
+    );
+  }
+
+  // public get autoRefresh() {
+  //   return this.subject;
+  // }
+
+  onQuantity(book: any) {
+    console.log(book);
+    for (var index in book.quantitybto) {
+      // console.log(book.quantitybto[index]);
+      this.cartService
+        .putRequest(
+          "cart/add_booksquantity_cart/" +
+            this.token +
+            "?bookId=" +
+            book.bookId,
+          book.quantitybto[index]
+        )
+        // .pipe(
+        //   tap(() => {
+        //     this.subject.next();
+        //     this.snackbar.open("updated...", "undo", { duration: 2500 });
+        //   })
+        // );
+        .subscribe(
+          (Response: any) => {
+            this.data.changeMessage("bookquantity");
+            this.snackbar.open("updated...", "undo", { duration: 2500 });
+          },
+          (error: any) => {
+            console.error(error);
+            console.log(error.error.message);
+            this.snackbar.open(error.error.message, "undo", { duration: 2500 });
+          }
+        );
+    }
+  }
+
+  ondescQuantity(book: any) {
+    console.log(book);
+    for (var index in book.quantitybto) {
+      this.cartService
+        .putRequest(
+          "cart/desc_booksquantity_cart/" +
+            this.token +
+            "?bookId=" +
+            book.bookId,
+          book.quantitybto[index]
+        )
+        .subscribe(
+          (Response: any) => {
+            this.data.changeMessage("bookquantity");
+            this.snackbar.open("updated...", "undo", { duration: 2500 });
+          },
+          (error: any) => {
+            console.error(error);
+            console.log(error.error.message);
+            this.snackbar.open(error.error.message, "undo", { duration: 2500 });
+          }
+        );
+    }
+  }
+
+  onRemove(book: any) {
+    console.log(book);
+    //for (var index in book.quantitybto) {
+    this.cartService
+      .deleteRequest(
+        "cart/remove_books_cart/" + this.token + "/" + book.bookId,
+        ""
+      )
+      .subscribe(
+        (Response: any) => {
+          this.data.changeMessage("bookquantity");
+          this.snackbar.open("updated...", "undo", { duration: 2500 });
+        },
+        (error: any) => {
+          console.error(error);
+          console.log(error.error.message);
+          this.snackbar.open(error.error.message, "undo", { duration: 2500 });
+        }
+      );
+    //}
+  }
 
   open: boolean;
   fields: boolean;
+
   onOpen() {
     this.open = true;
     this.fields = true;
@@ -94,7 +260,7 @@ export class ViewCartComponent implements OnInit {
 
   showSpinner = false;
   open2: boolean;
-
+  addModel: Address = new Address();
   onOpen2() {
     this.spinner.show();
     this.showSpinner = true;
@@ -103,18 +269,31 @@ export class ViewCartComponent implements OnInit {
       this.open2 = true;
     }, 2000);
     this.fields = false;
-    console.log(this.login.email + "*****************");
+
+    this.addressService
+      .postRequest("address/add/" + this.token, this.address)
+      .subscribe((Response: any) => {});
+
+    console.log(this.addModel.name + "***name");
+    console.log(this.addModel.address + "**address");
+    console.log(this.addModel.phoneNumber + "**phoneNumber");
+    console.log(this.addModel.pincode + "**pincode");
+    console.log(this.addModel.locality + "**locality");
+    console.log(this.addModel.city + "**city");
+    console.log(this.addModel);
   }
+
   onEdit() {
     this.fields = true;
     this.open2 = false;
   }
+
   onCheckOut() {
     this.spinner.show();
     this.showSpinner = true;
     setTimeout(() => {
       this.spinner.hide();
-      this.router.navigate(["/ordersucess"]);
+      this.router.navigate(["/books/ordersucess"]);
     }, 2000);
   }
 }

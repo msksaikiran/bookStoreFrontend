@@ -1,3 +1,3 @@
 export class ForgotPassword {
-    emailId:string;
+    email:string;
 }

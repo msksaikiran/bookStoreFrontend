@@ -1,9 +1,9 @@
 export class Login {
-    email:string;
+    mailOrMobile:string;
     password:string;
-    constructor(email:string,password:string){
-        console.log("const"+email)
-        this.email=email;
+    constructor(mailOrMobile:string,password:string){
+        
+        this.mailOrMobile=mailOrMobile;
         
         this.password=password;  
        }
