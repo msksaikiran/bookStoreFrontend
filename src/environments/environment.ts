@@ -22,8 +22,10 @@ export const environment = {
   cart_verify_book: "cart/verify_book/",
   GET_BOOKS_COUNT: "book/getBooksCount/",
   whishlist_books: "whishList/book/",
+  whishList_book_count: "whishList/book_count/",
   orderlist_books_confrim: "orders/confrim/",
-  orderlist_boooks: "orders/books/",
+  orderlist_books: "orders/books/",
+  orderlist_books_Count: "orders/books_count/",
 };
 
 /*

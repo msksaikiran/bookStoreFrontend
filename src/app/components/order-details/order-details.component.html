@@ -2,11 +2,13 @@
 <!-- <p>whishlist works!</p> -->
 <div role="combobox" flex="column" style="margin-left: 20%;">
   <mat-card class="matcard2">
-    <div class="mycart">
-      My Orders&nbsp;(2)
-    </div>
+    <div class="mycart">My Orders&nbsp;({{ bookcount }})</div>
     <div *ngFor="let book of myDatas">
       <div *ngIf="book.bookName != null">
+        <div class="mycart2">OrderId:&nbsp; {{ book.orderId }}</div>
+        <!-- <div *ngFor="let quaty of book.quantitybto">
+          <div class="quantity">{{ quaty.quantityOfBook }}</div>
+        </div> -->
         <div class="cartdetails" fxLayout="row" fxLayoutAlign="start start">
           <img class="bookimg" src="assets/images/Image 11@2x.png" />
           <div class="bookdetails">
@@ -15,7 +17,7 @@
               {{ book.bookName }}
             </div>
 
-            <div class="sub">{{ bookAuthor }}</div>
+            <div class="sub">{{ book.bookAuthor }}</div>
             <div style="font: Bold 18px/15px Lato; margin-bottom: 30px;">
               <!-- Rs. 1500 -->
               Rs. {{ book.bookPrice }}
@@ -24,6 +26,7 @@
         </div>
       </div>
       <br />
+      <!-- </div> -->
     </div>
   </mat-card>
 </div>

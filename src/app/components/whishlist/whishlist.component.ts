@@ -5,6 +5,7 @@ import { MatSnackBar } from "@angular/material";
 import { AddressService } from "src/app/service/address.service";
 import { Book } from "src/app/models/book";
 import { environment } from "src/environments/environment";
+import { UserService } from "src/app/service/user.service";
 
 @Component({
   selector: "app-whishlist",
@@ -18,33 +19,45 @@ export class WhishlistComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private snackbar: MatSnackBar,
-    // private userService: ViewcartService,
+    private userService: UserService,
     private addressService: AddressService
   ) {}
 
   ngOnInit() {
+    this.BookCount();
     this.onwhishlist();
   }
 
-  //   ongetwhistlist{
-  //   this.addressService
-  //     .postRequest("address/add/" + this.token, this.address)
-  //     .subscribe((Response: any) => { });
-  // }
+  bookcount: number;
+  BookCount() {
+    this.userService
+      .getRequest(
+        environment.whishList_book_count + localStorage.getItem("token")
+      )
+      .subscribe(
+        (Response: any) => {
+          console.log(Response);
+          this.bookcount = Response.obj;
+          this.snackbar.open(Response.message, "undo", { duration: 2500 });
+        },
+        (error: any) => {
+          console.error(error);
+          console.log(error.error.message);
+          this.snackbar.open(error.error.message, "undo", { duration: 2500 });
+        }
+      );
+  }
+
   token: String;
   books: Array<Book> = [];
   book: Book = new Book();
-  //
-  // books: [];
-  // token: string;
-
   quantitylist: [];
 
   bookincart: number;
   myDatas = new Array();
   onwhishlist() {
     this.token = localStorage.getItem("token");
-    this.addressService
+    this.userService
       .getRequest(environment.whishlist_books + this.token)
       .subscribe(
         (Response: any) => {
@@ -64,7 +77,7 @@ export class WhishlistComponent implements OnInit {
   onRemove(book: any) {
     console.log(book);
     this.token = localStorage.getItem("token");
-    this.addressService
+    this.userService
       .deleteRequest(
         environment.whishlist_books + this.token + "/" + book.bookId,
         ""
