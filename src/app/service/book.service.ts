@@ -16,6 +16,13 @@ export class BookService {
   public get autoRefresh() {
     return this.subject;
   }
+  getReset(data: any, token: any, role: any) {
+    return this.http_service.putMethod(
+      environment.baseUrl + role + "/" + environment.RESET_URL + token,
+      data,
+      {}
+    );
+  }
   getAvailableBooks() {
     let params = new HttpParams();
     params = params.append("pageNo", "1");

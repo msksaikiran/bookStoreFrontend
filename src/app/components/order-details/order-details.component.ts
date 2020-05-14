@@ -66,27 +66,5 @@ export class OrderDetailsComponent implements OnInit {
         this.snackbar.open(error.error.message, "undo", { duration: 2500 });
       }
     );
-    //     console.log(Response);
-    //     this.books = Response.obj;
-    //     if (Response.statusCode === 200) {
-    //       // this.addressService.changeMessage('trash')
-    //       this.books = Response.obj;
-    //       console.log(this.books);
-    //       this.snackbar.open("WhishList", "undo", { duration: 2500 });
-    //     } else {
-    //       console.log(Response);
-    //       this.books = Response.obj;
-    //       console.log(this.books);
-    //       this.snackbar.open("whishList unSuccessfull", "undo", {
-    //         duration: 2500,
-    //       });
-    //     }
-    //   },
-    //   (error: any) => {
-    //     console.error(error);
-    //     console.log(error.error.message);
-    //     this.snackbar.open(error.error.message, "undo", { duration: 2500 });
-    //   }
-    // );
   }
 }
