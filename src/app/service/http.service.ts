@@ -28,6 +28,7 @@ export class HttpService {
     }),
   };
   baseurl = environment.baseUrl;
+ 
   public postRequest(url :any, data: any ):any{
     return this.http.post("http://localhost:8080/" + url,data);
 
@@ -35,4 +36,21 @@ export class HttpService {
   public putRequestForget(url, data) {
     return this.http.post("http://localhost:8080/" + url, data);
   }
+  
+  public putRequestReset(url,data){
+    
+    this.token=localStorage.getItem("token");
+    console.log(this.token)
+    return this.http.post("http://localhost:8080/"+ url,data,{ headers: new HttpHeaders().set('token', localStorage.getItem('token')) });
+  }
+ 
+  public  getSearchRequest(url){
+   
+    return this.http.post("http://localhost:8080/"+ url,{ headers: new HttpHeaders().set('token', localStorage.getItem('token')) });
+  }
+  public  putRequestverify(url){
+   
+    return this.http.post("http://localhost:8080/"+ url,{ headers: new HttpHeaders().set('token', localStorage.getItem('token')) });
+  }
+  
 }

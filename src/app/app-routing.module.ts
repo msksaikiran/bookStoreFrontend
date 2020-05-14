@@ -27,7 +27,7 @@ const routes: Routes = [
     component: ForgetpasswordComponent,
   },
   {
-    path: "resetpassword/:role/:token",
+    path: ":role/resetpassword/:token",
     component: RestpasswordComponent,
   },
   {
@@ -39,7 +39,7 @@ const routes: Routes = [
       { path: "books", component: GetbooksComponent },
       {
         path: "books/viewcart",
-        //canActivate: [AuthGuardService],
+        canActivate: [AuthGuardService],
         component: ViewCartComponent,
       },
       {

@@ -2,22 +2,24 @@
   <mat-toolbar style="background-color: #a03037;">
     <mat-toolbar-row>
       <!--------------- bookimg and book --------------------------->
-      <div style="height: 68%; margin-left: 10%;">
-        <a mat-button (click)="onCart()" class="bookicon">
-          <img class="bookimg" src="assets/images/education@2x.png" />
+      <div style="height: 40%; margin-left: 8%;">
+        <a (click)="onBook()" class="bookicon">
+          <mat-icon color="primary" class="grab">
+            <img class="bookimg" src="assets/images/education@2x.png" />
+          </mat-icon>
         </a>
         <div class="booktext">BookStore</div>
       </div>
       <!-------------------- search ------------------->
       <div class="searche">
         <img class="scicon" src="assets/images/searchicon.png" />
-        <input type="text" class="searchinput" placeholder="search.." />
+        <input type="text" class="searchinput" placeholder="search.." [formControl]="myInput" autocomplete="off" (click)="searching()"/>
       </div>
 
       <div fxLayout="row" fxLayoutAlign="start end" style="margin-left: 23%;">
         <div class="carttext" (click)="onCart()">Cart</div>
-        <a mat-button (click)="onCart()" class="cartimg">
-          <mat-icon color="primary">
+        <a (click)="onCart()" class="cartimg">
+          <mat-icon color="primary" class="grab">
             <img class="image" src="assets/images/supermarket@2x.png" />
           </mat-icon>
         </a>

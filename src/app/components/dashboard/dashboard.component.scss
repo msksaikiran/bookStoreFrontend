@@ -11,7 +11,7 @@
   background-color: #a03037;
   width: 31px;
   height: 40px;
-  margin-left: -1%;
+  margin-left: 7%;
 }
 .bookimg {
   width: 31px;
@@ -32,7 +32,7 @@
   outline: none;
   margin-left: 1%;
   height: 20px;
-  font-size: 17px;
+  font-size: 18px;
 }
 .scicon {
   width: 13px;
@@ -43,11 +43,11 @@
   color: #ffffff;
   opacity: 1;
   font-size: 13px;
-  padding-right: 0%;
+  padding-right: 7%;
   margin-bottom: 3%;
 }
 .cartimg {
-  height: 39px;
+  height: 32px;
   opacity: 1;
   background-color: #a03037;
   border: none;
@@ -60,16 +60,7 @@
   width: 20px;
   height: 21px;
 }
-.image3 {
-  height: 100px;
-  width: 100px;
-  //margin-top: -58px;
-  border-radius: 40px;
-}
-.iconcam {
-  margin-top: -49px;
-  margin-left: 82px;
-}
+
 .profile {
   height: 44px;
   width: 44px;
@@ -78,14 +69,7 @@
 .page {
   padding: 5px;
 }
-// .toolbar{
-// position: relative;
-// flex-wrap: wrap;
-// padding: 10px;
-// display: block;
-// justify-content: center;
-// align-items: flex-start;
-// float: left;
+
 .mat-sidenav-container {
   display: flex;
   width: 100%;
@@ -106,63 +90,7 @@
   font-size: 18px;
 }
 
-// .searchInput {
-//   border: none;
-//   outline: none;
-//   top: 14px;
-//   left: 334px;
-//   width: 490px;
-//   height: 33px;
-//   background: #fcfcfc 0% 0% no-repeat padding-box;
-//   border-radius: 5px;
-//   border-top-left-radius: 0%;
-//   border-bottom-left-radius: 0%;
-//   opacity: 1;
-//   height: 33px;
-//   margin-left: -2px;
-//   padding-left: 13px;
-// }
-
-// .search {
-//   background-color: whitesmoke;
-//   border-radius: 4px;
-//   width: 40px;
-//   height: 42px;
-// }
-
-// .searche2 {
-//   width: 30%;
-//   height: 55%;
-//   border-radius: 3px;
-//   opacity: 1;
-//   margin-left: 7%;
-// }
-// // .mat-toolbar-row,
-// // .mat-toolbar-single-row {
-// //   display: flex;
-// //   box-sizing: border-box;
-// //   padding: 0 16px;
-// //   width: 100%;
-// //   flex-direction: row;
-// //   align-items: center;
-// //   white-space: nowrap;
-// //   background-color: #a03037;
-// // }
-
-// .mat-icon {
-//   background-repeat: no-repeat;
-//   display: inline-block;
-//   fill: currentColor;
-//   height: 24px;
-//   width: 24px;
-// }
-
-// mat-card {
-//   display: flex;
-//   flex-direction: column;
-//   flex-shrink: 0;
-// }
-
-// .page {
-//   padding: 5px;
-// }
+.grab {
+  cursor: -webkit-grab;
+  cursor: grab;
+}

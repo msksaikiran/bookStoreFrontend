@@ -16,3 +16,15 @@ body {
 // mat-icon {
 //   opacity: 0.75;
 // }
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
+  border-color:#A03037; 
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle{
+  color:#A03037;
+  background-color:#A03037;
+}
+
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+    background-color:#A03037
+}

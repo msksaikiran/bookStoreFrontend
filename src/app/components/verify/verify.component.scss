@@ -58,22 +58,16 @@ html,body
 }
 .login-wrapper .btn-block1{
     font-size: 18px;
-    text-align: center;
-    color: white;
-    background-color:#A03037;
-    border-radius: 3px;
-    border: none;
-    opacity: 1;
+    //  color: green;
+    width:50%;
+    margin-left: -10px;
     // background-image: url(/assets/images/bookstore.jpg);
 }
 .login-wrapper .btn-block2{
     font-size: 18px;
-    text-align: center;
-    color: white;
-    background-color:#A03037;
-    border-radius: 3px;
-    border: none;
-    opacity: 1;
+   
+    width:50%;
+     margin-left: 197px;
    
 }
 .login-wrapper .btn-block3{
@@ -97,19 +91,25 @@ html,body
 .login-wrapper .mat-card{
     padding:40px 70px 50px;
 }
-.login-wrapper .mat-stroked-button{
-    border:1px solid currentColor;
-    line-height:54px;
-    background:#FFF7FA;}
+.login-wrapper .mat-raised-button{
+    font-size: 18px;
+    text-align: center;
+    color: white;
+    background-color:#A03037;
+    border-radius: 3px;
+    border: none;
+    opacity: 1;
+    width:100%;
+   
+}
 .login-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix{
     padding:0.8375em 0;
 }
 .login-wrapper {
-    background-image: url(/assets/images/bookstore.jpg);
+    background-image: url(/assets/images/12.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: center;
-
   }
   .login-wrapper .login {
     min-height: 70vh;
@@ -120,17 +120,17 @@ html,body
  
     // mat-icon-stepper selected color change
     .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
-       background-color: #A03037 !important;
+       background-color:#A03037 !important;
     }
  
     // input outline color
     .mat-form-field-appearance-outline .mat-form-field-outline {
-       color: rgb(115, 119, 115) !important;
+       color: rgb(143, 146, 143) !important;
     }
  
     // mat-input focused color
     .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
-       color: #A03037 !important;
+       color:#A03037 !important;
     }
  
     // mat-input error outline color
@@ -151,7 +151,7 @@ html,body
  
     // mat-label normal state style
     .mat-form-field-label {
-       color: rgb(165, 167, 165) !important;
+       color: rgb(148, 151, 148) !important;
     }
  
     // mat-label focused style
@@ -164,5 +164,3 @@ html,body
        color: $custom-main-color !important;
     }
 }
-.grab {cursor: -webkit-grab; cursor: grab;}
- 

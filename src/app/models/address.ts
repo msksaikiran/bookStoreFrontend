@@ -1,8 +1,8 @@
 export class Address {
   public name: string;
   public address: string;
-  public phoneNumber: number;
-  public pincode: number;
+  public phoneNumber: String;
+  public pincode: String;
   public locality: String;
   public city: String;
   public landmark: String;

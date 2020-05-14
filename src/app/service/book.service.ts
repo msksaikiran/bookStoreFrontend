@@ -139,4 +139,10 @@ export class BookService {
       { params: params }
     );
   }
+  getBooksCount() {
+    return this.http_service.getMethod(
+      environment.baseUrl + environment.GET_BOOKS_COUNT + "/" + "get",
+      ""
+    );
+  }
 }

@@ -84,6 +84,7 @@ export class LoginComponent implements OnInit {
           this.token = localStorage.getItem("token");
           console.log(this.token);
           localStorage.setItem("email", response.mailOrMobile);
+          this.router.navigate(["books"]);
           this.snackBar.open(
             "Login Successfull",
             "undo",

@@ -4,6 +4,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { MatSnackBar } from "@angular/material";
 import { AddressService } from "src/app/service/address.service";
 import { Book } from "src/app/models/book";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-whishlist",
@@ -17,7 +18,7 @@ export class WhishlistComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private snackbar: MatSnackBar,
-    // private cartService: ViewcartService,
+    // private userService: ViewcartService,
     private addressService: AddressService
   ) {}
 
@@ -31,7 +32,7 @@ export class WhishlistComponent implements OnInit {
   //     .subscribe((Response: any) => { });
   // }
   token: String;
-  books: [];
+  books: Array<Book> = [];
   book: Book = new Book();
   //
   // books: [];
@@ -44,24 +45,13 @@ export class WhishlistComponent implements OnInit {
   onwhishlist() {
     this.token = localStorage.getItem("token");
     this.addressService
-      .getRequest("whishList/books_cart/" + this.token)
+      .getRequest(environment.whishlist_books + this.token)
       .subscribe(
         (Response: any) => {
           console.log(Response);
           this.books = Response.obj;
-          if (Response.statusCode === 200) {
-            // this.addressService.changeMessage('trash')
-            this.books = Response.obj;
-            console.log(this.books);
-            this.snackbar.open("WhishList", "undo", { duration: 2500 });
-          } else {
-            console.log(Response);
-            this.books = Response.obj;
-            console.log(this.books);
-            this.snackbar.open("whishList unSuccessfull", "undo", {
-              duration: 2500,
-            });
-          }
+          console.log(this.books);
+          this.snackbar.open(Response.message, "undo", { duration: 2500 });
         },
         (error: any) => {
           console.error(error);
@@ -76,27 +66,14 @@ export class WhishlistComponent implements OnInit {
     this.token = localStorage.getItem("token");
     this.addressService
       .deleteRequest(
-        "whishList/remove_books_WhishList/" +
-          this.token +
-          "?bookId=" +
-          book.bookId,
+        environment.whishlist_books + this.token + "/" + book.bookId,
         ""
       )
       .subscribe(
         (Response: any) => {
-          if (Response.statusCode === 200) {
-            // this.addressService.changeMessage('trash')
-            this.books = Response.obj;
-            console.log(this.books);
-            this.snackbar.open("WhishList", "undo", { duration: 2500 });
-          } else {
-            console.log(Response);
-            this.books = Response.obj;
-            console.log(this.books);
-            this.snackbar.open("whishList unSuccessfull", "undo", {
-              duration: 2500,
-            });
-          }
+          this.books = Response.obj;
+          console.log(this.books);
+          this.snackbar.open("WhishList", "undo", { duration: 2500 });
         },
         (error: any) => {
           console.error(error);

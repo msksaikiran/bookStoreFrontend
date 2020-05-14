@@ -50,6 +50,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 
 import { WhishlistComponent } from "./components/whishlist/whishlist.component";
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { VerifyComponent } from './components/verify/verify.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { OrderDetailsComponent } from './components/order-details/order-details.
     RestpasswordComponent,
     WhishlistComponent,
     OrderDetailsComponent,
+    VerifyComponent,
   ],
   imports: [
     BrowserModule,

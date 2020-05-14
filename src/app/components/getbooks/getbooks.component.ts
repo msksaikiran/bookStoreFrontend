@@ -9,19 +9,29 @@ import { Book } from "src/app/models/book";
   styleUrls: ["./getbooks.component.scss"],
 })
 export class GetbooksComponent implements OnInit {
-  bookList: Book[];
+  bookList: Array<Book> = [];
   sort: any = "Sort by relevance";
   sortTech1: any = "Price : Low to High";
   sortTech2: any = "Price : High to Low";
   sortTech3: any = "Newest Arrivals";
   length: number;
-  page: number = 1;
+  page: number;
+  endPage: number;
   pages: Array<Number> = [];
   constructor(private bookService: BookService) {}
 
   ngOnInit() {
     this.sort;
     this.getAvailableBooks();
+    this.getBooksCount();
+  }
+  nextPage() {
+    this.page = this.page + 1;
+    this.doSorting(this.sort);
+  }
+  previousPage() {
+    this.page = this.page - 1;
+    this.doSorting(this.sort);
   }
   doSorting(option: any) {
     this.sort = option;
@@ -68,15 +78,6 @@ export class GetbooksComponent implements OnInit {
   getAvailableBooks() {
     this.bookService.getAvailableBooks().subscribe((response: any) => {
       this.bookList = response["obj"];
-      this.length = this.bookList.length;
-      if (this.length > 9) {
-        for (var i = 1; i < this.length - 7; i++) {
-          this.pages[i] = i;
-          console.log("number is: ", this.pages[i]);
-        }
-      } else {
-        this.pages[1] = 1;
-      }
     });
   }
   getAvailableBooksOfPage(pageNo: number) {
@@ -88,22 +89,17 @@ export class GetbooksComponent implements OnInit {
         this.page = pageNo;
       });
   }
-  nextPage() {
-    this.bookService
-      .getAvailableBooksOfPage(this.page + 1)
-      .subscribe((response: any) => {
-        this.bookList = response["obj"];
-        this.length = this.bookList.length;
-        this.page = this.page + 1;
-      });
-  }
-  previousPage() {
-    this.bookService
-      .getAvailableBooksOfPage(this.page - 1)
-      .subscribe((response: any) => {
-        this.bookList = response["obj"];
-        this.length = this.bookList.length;
-        this.page = this.page - 1;
-      });
+  getBooksCount() {
+    this.bookService.getBooksCount().subscribe((response: any) => {
+      this.length = response["obj"];
+      if (this.length > 10) {
+        for (var i = 1; i <= this.length / 10 + 1; i++) {
+          this.pages[i] = i;
+        }
+        this.endPage = this.pages.length - 2;
+      } else {
+        this.page = 1;
+      }
+    });
   }
 }
