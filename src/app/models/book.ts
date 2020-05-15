@@ -12,4 +12,5 @@ export class Book {
   public isAdded: boolean;
   public isListed: boolean;
   public totalPrice: any;
+  public bookincart: number;
 }

@@ -58,6 +58,7 @@ export class DashboardComponent implements OnInit {
   }
   onLogout() {
     localStorage.clear();
+    this.visible = false;
     this.spinner.show();
     this.showSpinner = true;
     setTimeout(() => {

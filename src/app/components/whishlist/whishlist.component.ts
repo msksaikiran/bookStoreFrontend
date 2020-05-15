@@ -77,6 +77,7 @@ export class WhishlistComponent implements OnInit {
       )
       .subscribe(
         (Response: any) => {
+          console.log(Response);
           this.books = Response.obj;
           console.log(this.books);
           this.snackbar.open("WhishList", "undo", { duration: 2500 });
