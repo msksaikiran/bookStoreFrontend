@@ -55,7 +55,7 @@ export class RestpasswordComponent implements OnInit {
     };
     this.service.getReset(data, token, role).subscribe((result: any) => {
       console.log(result);
-      this.matSnackBar.open("your password updated", "cancel", {
+      this.matSnackBar.open("your succesfully updated", "cancel", {
         duration: 5000,
       });
       this.route.navigate(["/login"]);

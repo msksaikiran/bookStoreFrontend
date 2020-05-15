@@ -14,10 +14,10 @@
         <img
           mat-card-image
           fxLayoutAlign="center start"
-          src="assets/images/dontmake.png"
+          src="{{ book.bookImage }}"
           alt="Snow"
         />
-        <button *ngIf="isOutOfStock ; boxOutOfStockWIshList" class="btn">
+        <button *ngIf="book.noOfBooks == 0" class="btn">
           OUT OF STOCK
         </button>
       </div>
@@ -45,14 +45,14 @@
     <mat-card-actions fxLayout="row" fxLayoutGap="7%">
       <button
         class="box1"
-        *ngIf="!isAdded && !isOutOfStock; else removeFromBag"
+        *ngIf="!book.isAdded && !book.noOfBooks == 0; else removeFromBag"
         (click)="addToCart(b)"
       >
         ADD TO BAG
       </button>
       <ng-template #removeFromBag>
         <button
-          *ngIf="!isOutOfStock"
+          *ngIf="!book.noOfBooks == 0"
           class="added"
           id="remove-from-bag"
           (click)="removeFromCart()"
@@ -62,20 +62,20 @@
       </ng-template>
       <button
         class="box"
-        *ngIf="!isAdded && !isOutOfStock && !isListed"
+        *ngIf="!book.isAdded && !book.noOfBooks == 0 && !book.isListed"
         (click)="addToWishlist()"
       >
         WISHLIST
       </button>
       <button
-        class="box"
-        *ngIf="isListed && !isAdded"
+        class="boxwhish"
+        *ngIf="book.isListed && !book.isAdded"
         (click)="removeFromWishlist()"
       >
         IN WISHLIST
       </button>
       <button
-        *ngIf="isOutOfStock"
+        *ngIf="book.noOfBooks == 0"
         class="boxOutOfStockWishList"
         id="add-to-wishlist"
         (click)="addToWishlist()"

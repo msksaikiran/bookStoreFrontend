@@ -13,13 +13,26 @@
       <!-------------------- search ------------------->
       <div class="searche">
         <img class="scicon" src="assets/images/searchicon.png" />
-        <input type="text" class="searchinput" placeholder="search.." [formControl]="myInput" autocomplete="off" (click)="searching()"/>
+        <input
+          type="text"
+          class="searchinput"
+          placeholder="search.."
+          [formControl]="myInput"
+          autocomplete="off"
+          (click)="searching()"
+        />
       </div>
 
       <div fxLayout="row" fxLayoutAlign="start end" style="margin-left: 23%;">
         <div class="carttext" (click)="onCart()">Cart</div>
         <a (click)="onCart()" class="cartimg">
-          <mat-icon color="primary" class="grab">
+          <mat-icon
+            class="grab"
+            [matBadge]="badgeCounter"
+            matBadgeSize="small"
+            [matBadgeHidden]="badgeCounter == 0"
+            matBadgePosition="above after"
+          >
             <img class="image" src="assets/images/supermarket@2x.png" />
           </mat-icon>
         </a>

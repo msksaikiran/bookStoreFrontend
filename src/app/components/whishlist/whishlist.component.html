@@ -5,7 +5,8 @@
     <div *ngFor="let book of books">
       <div *ngIf="book.bookName != null">
         <div class="cartdetails" fxLayout="row" fxLayoutAlign="start start">
-          <img class="bookimg" src="assets/images/Image 11@2x.png" />
+          <!-- <img class="bookimg" src="assets/images/Image 11@2x.png" /> -->
+          <img class="bookimg" src="{{ book.bookImage }}" />
           <div class="bookdetails">
             <div class="booktitle">
               <!-- Don't Make Me Think -->
@@ -30,7 +31,7 @@
   <app-footer></app-footer>
 </div>
 <ng-template #foot>
-  <div class="foot" style="top: 720px; margin-top: 14%;">
+  <div class="foot" style="top: 720px; margin-top: 35%;">
     <app-footer></app-footer>
   </div>
 </ng-template>

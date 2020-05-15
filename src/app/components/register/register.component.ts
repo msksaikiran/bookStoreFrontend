@@ -68,11 +68,11 @@ nam=new FormControl('', );
           console.log(response);
           this.spinner.hide();
           this.snackBar.open(
-            "Registered Successfully",
+            "Link sent to mail for verification",
             "undo",
             { duration: 3000 }
           )
-          this.router.navigate(['/login'])
+          // this.router.navigate(['/login'])
         } else {
           console.log(response);
           this.snackBar.open(

@@ -12,6 +12,8 @@ import { AuthGuardService } from "./service/guards/auth-guard.service";
 import { WhishlistComponent } from "./components/whishlist/whishlist.component";
 import { BooksComponent } from "./components/books/books.component";
 import { OrderDetailsComponent } from "./components/order-details/order-details.component";
+import { SearchComponent } from "./components/search/search.component";
+import { VerifyComponent } from "./components/verify/verify.component";
 
 const routes: Routes = [
   {
@@ -31,12 +33,17 @@ const routes: Routes = [
     component: RestpasswordComponent,
   },
   {
+    path: ":role/registration/verify/:token",
+    component: VerifyComponent,
+  },
+  {
     path: "",
     component: DashboardComponent,
     //canActivateChild: [AuthGuardService],
     children: [
       { path: "", redirectTo: "/books", pathMatch: "full" },
       { path: "books", component: GetbooksComponent },
+      { path: "books/search", component: SearchComponent },
       {
         path: "books/viewcart",
         canActivate: [AuthGuardService],
@@ -63,3 +70,6 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
+function newFunction(): string {
+  return "setPassword";
+}

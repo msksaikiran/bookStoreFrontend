@@ -78,31 +78,10 @@ export class BookService {
       );
   }
   addToWishList(bookId: number) {
-    let params = new HttpParams();
-    params = params.append("bookId", bookId + "");
     return this.http_service
       .postMethod(
         environment.baseUrl +
           environment.ADD_TO_WISHLIST +
-          localStorage.getItem("token") +
-          "/" +
-          bookId,
-        {},
-        {}
-      )
-      .pipe(
-        tap(() => {
-          this.subject.next();
-        })
-      );
-  }
-  removeFromWishList(bookId: number) {
-    let params = new HttpParams();
-    params = params.append("bookId", bookId + "");
-    return this.http_service
-      .postMethod(
-        environment.baseUrl +
-          environment.REMOVE_FROM_WISHLIST +
           localStorage.getItem("token") +
           "/" +
           bookId,
@@ -143,6 +122,28 @@ export class BookService {
     return this.http_service.getMethod(
       environment.baseUrl + environment.GET_BOOKS_COUNT + "/" + "get",
       ""
+    );
+  }
+  isAddedTocart(bookId: number) {
+    return this.http_service.getMethod(
+      environment.baseUrl +
+        environment.cart_verify_book +
+        localStorage.getItem("token") +
+        "/" +
+        "?bookId=" +
+        bookId,
+      {}
+    );
+  }
+  isAddedToWishList(bookId: number) {
+    return this.http_service.getMethod(
+      environment.baseUrl +
+        environment.VERIFY_WHISHLIST_BOOK +
+        localStorage.getItem("token") +
+        "/" +
+        "?bookId=" +
+        bookId,
+      {}
     );
   }
 }

@@ -44,8 +44,10 @@ export class AuthGuardService implements CanActivate {
       return true;
     }
 
+    //this.snackBar.open("Please Login First...", "undo", { duration: 25000 });
     // navigate to login page
     this._router.navigate(["/login"]);
+    alert("Please Login First.");
     return false;
   }
   //throw new Error("Method not implemented.");

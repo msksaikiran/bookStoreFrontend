@@ -9,4 +9,7 @@ export class Book {
   public reviewRating: Array<any>;
   public quantitybto: any;
   public orderId: any;
+  public isAdded: boolean;
+  public isListed: boolean;
+  public totalPrice: any;
 }

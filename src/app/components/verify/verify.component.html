@@ -1,22 +1,14 @@
-<!-- <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
     <mat-card class="box">
       <mat-card-header>
-        <mat-card-title>Forget Password</mat-card-title>
+        <mat-card-title> Verification</mat-card-title>
       </mat-card-header>
       <br>
       <form class="example-form">
-        <mat-card-content>
-          <mat-form-field appearance="outline" class="example-full-width">
-              <mat-label >Email</mat-label> 
-              <mat-error *ngIf="email.invalid"> {{ emailValidation() }}</mat-error>
-              <input type="email" matInput placeholder="Enter your email" [(ngModel)]="forgot.email" [formControl]="email"  required>
-              <mat-icon matSuffix> mail_outline</mat-icon>
-              <mat-hint>Email</mat-hint>
-            </mat-form-field>  
-        </mat-card-content>
-        <div   fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2px" >
-        <button   mat-raised-button  class="btn-block1" (click)="onforgot()">Email Verify</button>
+        
+        <div   fxLayout="row" fxLayoutAlign="center center"  >
+        <button   mat-raised-button  class="btn-block1" (click)="onverify()">Click here to Verify</button>
       </div>
       </form>
     </mat-card>
-  </div> -->
+  </div>

@@ -35,7 +35,6 @@ import { MatTableModule } from "@angular/material/table";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { ViewCartComponent } from "./components/view-cart/view-cart.component";
-import { PaginationComponent } from "./components/pagination/pagination.component";
 import { OrderSuccessComponent } from "./components/order-success/order-success.component";
 import { GetbooksComponent } from "./components/getbooks/getbooks.component";
 import { SortBooksPipe } from "./pipes/sort-books.pipe";
@@ -49,8 +48,10 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { NgxSpinnerModule } from "ngx-spinner";
 
 import { WhishlistComponent } from "./components/whishlist/whishlist.component";
-import { OrderDetailsComponent } from './components/order-details/order-details.component';
-import { VerifyComponent } from './components/verify/verify.component';
+import { OrderDetailsComponent } from "./components/order-details/order-details.component";
+import { VerifyComponent } from "./components/verify/verify.component";
+import { MatBadgeModule } from "@angular/material/badge";
+import { SearchComponent } from "./components/search/search.component";
 
 @NgModule({
   declarations: [
@@ -61,7 +62,6 @@ import { VerifyComponent } from './components/verify/verify.component';
     ViewCartComponent,
     FooterComponent,
     BooksComponent,
-    PaginationComponent,
     OrderSuccessComponent,
     GetbooksComponent,
     SortBooksPipe,
@@ -70,6 +70,7 @@ import { VerifyComponent } from './components/verify/verify.component';
     WhishlistComponent,
     OrderDetailsComponent,
     VerifyComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,6 +100,7 @@ import { VerifyComponent } from './components/verify/verify.component';
     MatRadioModule,
     MatTooltipModule,
     MatAutocompleteModule,
+    MatBadgeModule,
     HttpClientModule,
   ],
   providers: [],

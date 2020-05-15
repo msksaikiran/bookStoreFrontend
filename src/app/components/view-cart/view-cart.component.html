@@ -6,7 +6,7 @@
       <div *ngIf="book.bookName != null">
         <div class="cartdetails" fxLayout="row" fxLayoutAlign="start start">
           <!-- "assets/images/Image 11@2x.png" -->
-          <img class="bookimg" src="assets/images/Image 11@2x.png" />
+          <img class="bookimg" src="{{ book.bookImage }}" />
           <div class="bookdetails">
             <div class="booktitle">
               <!-- Don't Make Me Think -->
@@ -215,7 +215,8 @@
         <mat-radio-group
           aria-label="Select an option"
           fxLayoutGap="110px"
-          [disabled]="!fields" (change)="onChange($event)"
+          [disabled]="!fields"
+          (change)="onChange($event)"
         >
           <mat-radio-button value="Home">Home</mat-radio-button>
           <mat-radio-button value="Work">Work</mat-radio-button>
@@ -249,8 +250,8 @@
     <div *ngFor="let book of myDatas">
       <div *ngIf="book.bookName != null">
         <div class="cartdetails" fxLayout="row" fxLayoutAlign="start start">
-          <img class="bookimg" src="assets/images/Image 11@2x.png" />
-          <!-- <img class="bookimg" src="{{ book.bookImage }}" /> -->
+          <!-- <img class="bookimg" src="assets/images/Image 11@2x.png" /> -->
+          <img class="bookimg" src="{{ book.bookImage }}" />
           <div class="bookdetails">
             <div class="booktitle">
               <!-- Don't Make Me Think -->
@@ -259,7 +260,7 @@
 
             <div class="sub">{{ book.bookAuthor }}</div>
             <div style="font: Bold 18px/15px Lato; margin-bottom: 30px;">
-              Rs. {{ book.bookPrice }}
+              Rs. {{ book.totalPrice }}
             </div>
           </div>
         </div>
@@ -273,6 +274,6 @@
   </mat-card>
   <br /><br />
 </div>
-<div style="top: 1024px; margin-bottom: 1%;"class="footer">
+<div style="top: 1024px; margin-bottom: 1%;" class="footer">
   <app-footer></app-footer>
 </div>

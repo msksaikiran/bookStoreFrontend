@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { BookService } from "src/app/service/book.service";
 import { Book } from "src/app/models/book";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: "app-getbooks",
@@ -14,16 +15,19 @@ export class GetbooksComponent implements OnInit {
   sortTech1: any = "Price : Low to High";
   sortTech2: any = "Price : High to Low";
   sortTech3: any = "Newest Arrivals";
-  length: number;
+  length: number = 0;
   page: number;
-  endPage: number;
+  endPage: number = 0;
   pages: Array<Number> = [];
-  constructor(private bookService: BookService) {}
+  constructor(
+    private bookService: BookService,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit() {
     this.sort;
-    this.getAvailableBooks();
     this.getBooksCount();
+    this.getAvailableBooks();
   }
   nextPage() {
     this.page = this.page + 1;
@@ -32,6 +36,23 @@ export class GetbooksComponent implements OnInit {
   previousPage() {
     this.page = this.page - 1;
     this.doSorting(this.sort);
+  }
+  getBooksCount() {
+    this.spinner.show();
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 2000);
+    this.bookService.getBooksCount().subscribe((response: any) => {
+      this.length = response["obj"];
+      if (this.length > 10) {
+        for (var i = 1; i <= this.length / 10 + 1; i++) {
+          this.pages[i] = i;
+        }
+        this.endPage = this.pages.length - 2;
+      } else {
+        this.page = 1;
+      }
+    });
   }
   doSorting(option: any) {
     this.sort = option;
@@ -49,7 +70,6 @@ export class GetbooksComponent implements OnInit {
         .getBooksSortedByPriceLow(this.page)
         .subscribe((response: any) => {
           this.bookList = response["obj"];
-          this.length = this.bookList.length;
         });
     }
     if (option == "Price : High to Low") {
@@ -60,7 +80,6 @@ export class GetbooksComponent implements OnInit {
         .getBooksSortedByPriceHigh(this.page)
         .subscribe((response: any) => {
           this.bookList = response["obj"];
-          this.length = this.bookList.length;
         });
     }
     if (option == "Newest Arrivals") {
@@ -71,7 +90,6 @@ export class GetbooksComponent implements OnInit {
         .getBooksSortedByArrivals(this.page)
         .subscribe((response: any) => {
           this.bookList = response["obj"];
-          this.length = this.bookList.length;
         });
     }
   }
@@ -85,21 +103,7 @@ export class GetbooksComponent implements OnInit {
       .getAvailableBooksOfPage(pageNo)
       .subscribe((response: any) => {
         this.bookList = response["obj"];
-        this.length = this.bookList.length;
         this.page = pageNo;
       });
-  }
-  getBooksCount() {
-    this.bookService.getBooksCount().subscribe((response: any) => {
-      this.length = response["obj"];
-      if (this.length > 10) {
-        for (var i = 1; i <= this.length / 10 + 1; i++) {
-          this.pages[i] = i;
-        }
-        this.endPage = this.pages.length - 2;
-      } else {
-        this.page = 1;
-      }
-    });
   }
 }

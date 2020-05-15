@@ -60,7 +60,7 @@
         <app-books [book]="book"></app-books>
       </div>
     </div>
-    <div class="paginator" style="padding-top: 20px;">
+    <div class="paginator" style="padding-top: 20px;" *ngIf="length > 8">
       <div fxLayout="row" fxLayoutAlign="center center">
         <div>
           <button
@@ -85,7 +85,7 @@
         </div>
         <div>
           <button
-            [disabled]="page > endPage - 1"
+            [disabled]="page > endPage"
             (click)="nextPage()"
             mat-mini-fab
             style="
@@ -100,7 +100,7 @@
       </div>
     </div>
   </div>
-  <div class="footer" *ngIf=" bookList.length > 2; else foot">
+  <div class="footer" *ngIf="bookList.length > 2; else foot">
     <app-footer></app-footer>
   </div>
   <ng-template #foot>
