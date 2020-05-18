@@ -77,10 +77,14 @@ export class BooksComponent implements OnInit {
     );
   }
   isAddedToWishList() {
-    this.bookService
-      .isAddedToWishList(this.book.bookId)
-      .subscribe((response: any) => {
+    this.bookService.isAddedToWishList(this.book.bookId).subscribe(
+      (response: any) => {
         this.book.isListed = response["obj"];
-      });
+      },
+      (error: any) => {
+        console.error(error);
+        console.log(error.error.message);
+      }
+    );
   }
 }

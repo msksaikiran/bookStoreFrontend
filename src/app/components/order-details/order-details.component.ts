@@ -23,7 +23,6 @@ export class OrderDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.BookCount();
     this.onOrderlist();
   }
 
@@ -57,11 +56,10 @@ export class OrderDetailsComponent implements OnInit {
   }
 
   orderId = new Array();
-
+  count = 0;
   onOrderlist() {
     this.token = localStorage.getItem("token");
-    console.log("*********");
-    console.log(this.token);
+
     this.userService
       .getRequest(environment.orderlist_books + this.token)
       .subscribe(
@@ -69,23 +67,21 @@ export class OrderDetailsComponent implements OnInit {
           console.log(Response);
           for (var len in Response.obj) {
             this.books = Response.obj[len];
-            console.log(Response.obj[0]["orderId"]);
             this.orderId.push(Response.obj[0]["orderId"]);
             let res = this.books["booksList"];
-
+            console.log(this.books["booksList"]);
+            this.myDatas.push(this.books["booksList"]);
             /**
              * bookdetails
              */
             for (var index in res) {
-              this.book = res[0]; //book details
+              this.book = res[index]; //book details
               this.book.orderId = this.books["orderId"];
-              //this.quantitylist = this.books["quantityOfBooks"];
-              // this.book.quantitybto = this.books["quantityOfBooks"];
               this.myDatas.push(this.book);
+              console.log(this.count++);
             }
           }
           console.log(this.myDatas);
-          this.snackbar.open(Response.message, "undo", { duration: 2500 });
         },
         (error: any) => {
           console.error(error);

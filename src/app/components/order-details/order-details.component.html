@@ -1,33 +1,25 @@
-<!-- <p>order-details? works!</p> -->
-<!-- <p>whishlist works!</p> -->
 <div role="combobox" flex="column" style="margin-left: 20%;">
   <mat-card class="matcard2">
-    <div class="mycart">My Orders&nbsp;({{ bookcount }})</div>
+    <div class="mycart">My Orders&nbsp;({{ count }})</div>
     <div *ngFor="let book of myDatas">
       <div *ngIf="book.bookName != null">
         <div class="mycart2">OrderId:&nbsp; {{ book.orderId }}</div>
-        <!-- <div *ngFor="let quaty of book.quantitybto">
-          <div class="quantity">{{ quaty.quantityOfBook }}</div>
-        </div> -->
+
         <div class="cartdetails" fxLayout="row" fxLayoutAlign="start start">
-          <!-- <img class="bookimg" src="assets/images/Image 11@2x.png" /> -->
           <img class="bookimg" src="{{ book.bookImage }}" />
           <div class="bookdetails">
             <div class="booktitle">
-              <!-- Don't Make Me Think -->
               {{ book.bookName }}
             </div>
 
             <div class="sub">{{ book.bookAuthor }}</div>
-            <div style="font: Bold 18px/15px Lato; margin-bottom: 30px;">
-              <!-- Rs. 1500 -->
+            <!-- <div style="font: Bold 18px/15px Lato; margin-bottom: 30px;">
               Rs. {{ book.bookPrice }}
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
       <br />
-      <!-- </div> -->
     </div>
   </mat-card>
 </div>
@@ -35,7 +27,7 @@
   <app-footer></app-footer>
 </div>
 <ng-template #foot>
-  <div class="foot" style="top: 720px; margin-top: 35%;">
+  <div class="foot" style="top: 720px; margin-top: 55%;">
     <app-footer></app-footer>
   </div>
 </ng-template>

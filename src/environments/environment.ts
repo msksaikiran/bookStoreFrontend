@@ -16,12 +16,14 @@ export const environment = {
   SORT_BY_LOW_TO_HIGH: "book/sortbylowprice/",
   SORT_BY_HIGH_TO_LOW: "book/sortbyhighprice/",
   SORT_BY_NEW_ARRIVALS: "book/sortbyarrival/",
-  Get_book_Cart: "cart/cartdetials",
   VERIFY_WHISHLIST_BOOK: "whishList/verify_book/",
+  VERIFY_CART_BOOK: "cart/verify_book/",
+  GET_BOOKS_COUNT: "book/bookscount",
+  PROFILE_CHANGE_OR_UPLOAD:"user/uploaduserimage",
+  Get_book_Cart: "cart/cartdetials",
   book_count_cart: "cart/bookCount",
   cart_inc_bookquantity: "cart/incr_booksquantity",
   cart_desc_bookquantity: "cart/desc_booksquantity",
-  GET_BOOKS_COUNT: "book/bookscount",
   cart_verify_book: "cart/verify_book",
   whishlist_books: "whishList/book",
   whishlist_books_remove: "whishList/book/",
@@ -29,6 +31,7 @@ export const environment = {
   orderlist_books_confrim: "orders/confrim/",
   orderlist_books: "orders/books/",
   orderlist_books_Count: "orders/books_count/",
+  user_profile: "user/profileUrl",
 };
 
 /*

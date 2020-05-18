@@ -44,32 +44,9 @@ export class BookService {
     params = params.append("bookId", bookId + "");
     return this.http_service
       .postMethod(
-        environment.baseUrl +
-          environment.ADD_TO_CART +
-          localStorage.getItem("token") +
-          "/" +
-          bookId,
+        environment.baseUrl + environment.ADD_TO_CART + bookId,
         {},
-        {}
-      )
-      .pipe(
-        tap(() => {
-          this.subject.next();
-        })
-      );
-  }
-  removeFromCart(bookId: number) {
-    let params = new HttpParams();
-    params = params.append("bookId", bookId + "");
-    return this.http_service
-      .postMethod(
-        environment.baseUrl +
-          environment.REMOVE_FROM_CART +
-          localStorage.getItem("token") +
-          "/" +
-          bookId,
-        {},
-        {}
+        this.http_service.httpOptions
       )
       .pipe(
         tap(() => {
@@ -80,13 +57,9 @@ export class BookService {
   addToWishList(bookId: number) {
     return this.http_service
       .postMethod(
-        environment.baseUrl +
-          environment.ADD_TO_WISHLIST +
-          localStorage.getItem("token") +
-          "/" +
-          bookId,
+        environment.baseUrl + environment.ADD_TO_WISHLIST + bookId,
         {},
-        {}
+        this.http_service.httpOptions
       )
       .pipe(
         tap(() => {
@@ -126,24 +99,17 @@ export class BookService {
   }
   isAddedTocart(bookId: number) {
     return this.http_service.getMethod(
-      environment.baseUrl +
-        environment.cart_verify_book +
-        localStorage.getItem("token") +
-        "/" +
-        "?bookId=" +
-        bookId,
-      {}
+      environment.baseUrl + environment.VERIFY_CART_BOOK + "?bookId=" + bookId,
+      this.http_service.httpOptions
     );
   }
   isAddedToWishList(bookId: number) {
     return this.http_service.getMethod(
       environment.baseUrl +
         environment.VERIFY_WHISHLIST_BOOK +
-        localStorage.getItem("token") +
-        "/" +
         "?bookId=" +
         bookId,
-      {}
+      this.http_service.httpOptions
     );
   }
 }

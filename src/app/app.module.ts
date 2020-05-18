@@ -52,6 +52,7 @@ import { OrderDetailsComponent } from "./components/order-details/order-details.
 import { VerifyComponent } from "./components/verify/verify.component";
 import { MatBadgeModule } from "@angular/material/badge";
 import { SearchComponent } from "./components/search/search.component";
+import { SearchPipe } from './pipes/search.pipe';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { SearchComponent } from "./components/search/search.component";
     OrderDetailsComponent,
     VerifyComponent,
     SearchComponent,
+    SearchPipe,
   ],
   imports: [
     BrowserModule,

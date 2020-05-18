@@ -37,21 +37,4 @@ export class ViewcartService {
   public deleteRequest(url: any, data: any): any {
     return this.http.delete(this.baseurl + url, data);
   }
-  incrementQuantity(book: any, index: any) {
-    return this.http_service
-      .putMethod(
-        environment.baseUrl +
-          "cart/add_booksquantity_cart/" +
-          localStorage.getItem("token") +
-          "?bookId=" +
-          book.bookId,
-        book.quantitybto[index],
-        {}
-      )
-      .pipe(
-        tap(() => {
-          this.subject.next();
-        })
-      );
-  }
 }

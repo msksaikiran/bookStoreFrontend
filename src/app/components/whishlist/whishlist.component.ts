@@ -67,6 +67,7 @@ export class WhishlistComponent implements OnInit {
     );
   }
 
+  count: boolean = true;
   onRemove(book: any) {
     console.log(book);
     this.token = localStorage.getItem("token");
@@ -80,11 +81,11 @@ export class WhishlistComponent implements OnInit {
           console.log(Response);
           this.books = Response.obj;
           console.log(this.books);
-          this.snackbar.open("WhishList", "undo", { duration: 2500 });
+          this.bookcount -= 1;
+          this.count = false;
+          this.snackbar.open(Response.message, "undo", { duration: 2500 });
         },
         (error: any) => {
-          console.error(error);
-          console.log(error.error.message);
           this.snackbar.open(error.error.message, "undo", { duration: 2500 });
         }
       );

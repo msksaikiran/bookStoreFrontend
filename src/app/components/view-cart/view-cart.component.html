@@ -1,8 +1,8 @@
 <div role="combobox" flex="column" style="margin-left: 16%;">
   <mat-card class="matcard1" [ngClass]="open == true ? 'matcardincr' : 'dummy'">
-    <div class="mycart">My cart&nbsp;({{ bookcount }})</div>
-    <!-- <div *ngFor="let cart of books"> -->
-    <div *ngFor="let book of myDatas">
+    <div *ngIf="count" class="mycart">My cart&nbsp;({{ bookcount }})</div>
+    <div *ngIf="!count" class="mycart">My cart&nbsp;({{ bookcount }})</div>
+    <div *ngFor="let book of bookNquantityData">
       <div *ngIf="book.bookName != null">
         <div class="cartdetails" fxLayout="row" fxLayoutAlign="start start">
           <!-- "assets/images/Image 11@2x.png" -->
@@ -52,7 +52,12 @@
     <!-- </div> -->
     <!----- end of for ----------->
     <div fxLayout="column" fxLayoutAlign="end end" *ngIf="placeOrder">
-      <button mat-raised-button class="button" (click)="onOpen()" *ngIf="!open">
+      <button
+        mat-raised-button
+        class="button"
+        (click)="onplaceOrder()"
+        *ngIf="!open"
+      >
         Place order
       </button>
     </div>
@@ -219,9 +224,15 @@
           [disabled]="!fields"
           (change)="onChange($event)"
         >
-          <mat-radio-button value="Home">Home</mat-radio-button>
-          <mat-radio-button value="Work">Work</mat-radio-button>
-          <mat-radio-button value="Other">Other</mat-radio-button>
+          <mat-radio-button [checked]="true" (click)="getaddress()" value="Home"
+            >Home</mat-radio-button
+          >
+          <mat-radio-button (click)="onwork()" value="Work"
+            >Work</mat-radio-button
+          >
+          <mat-radio-button (click)="onOther()" value="Other"
+            >Other</mat-radio-button
+          >
         </mat-radio-group>
       </div>
 
@@ -230,7 +241,7 @@
           mat-raised-button
           *ngIf="!open2"
           class="button"
-          (click)="onOpen2()"
+          (click)="onContinue()"
         >
           Continue
         </button>
@@ -246,9 +257,9 @@
   </mat-card>
 
   <mat-card class="matcard2" *ngIf="open2">
-    <div class="mycart">My cart&nbsp;({{ bookincart }})</div>
+    <div class="mycart">Order summery</div>
 
-    <div *ngFor="let book of myDatas">
+    <div *ngFor="let book of bookNquantityData">
       <div *ngIf="book.bookName != null">
         <div class="cartdetails" fxLayout="row" fxLayoutAlign="start start">
           <!-- <img class="bookimg" src="assets/images/Image 11@2x.png" /> -->
@@ -268,7 +279,7 @@
       </div>
     </div>
     <div fxLayout="column" fxLayoutAlign="end end">
-      <button mat-raised-button class="button" (click)="onCheckOut()">
+      <button mat-raised-button class="button" (click)="onCheckOut(book)">
         Checkout
       </button>
     </div>
