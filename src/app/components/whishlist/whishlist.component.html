@@ -1,38 +1,86 @@
-<!-- <p>whishlist works!</p> -->
 <div role="combobox" flex="column" style="margin-left: 16%;">
   <mat-card class="matcard2">
-    <div *ngIf="count" class="mycart">My cart&nbsp;({{ bookcount }})</div>
-    <div *ngIf="!count" class="mycart">My cart&nbsp;({{ bookcount }})</div>
+    <div *ngIf="count" class="mycart">My WishList&nbsp;({{ bookcount }})</div>
+    <div *ngIf="!count" class="mycart">My WishList&nbsp;({{ bookcount }})</div>
     <div *ngFor="let book of books">
-      <div *ngIf="book.bookName != null">
-        <div class="cartdetails" fxLayout="row" fxLayoutAlign="start start">
+      <div *ngIf="book != null">
+        <div
+          class="cartdetails"
+          style="margin-left: 2%;"
+          fxLayout="row"
+          fxLayoutAlign="start start"
+        >
           <!-- <img class="bookimg" src="assets/images/Image 11@2x.png" /> -->
           <img class="bookimg" src="{{ book.bookImage }}" />
           <div class="bookdetails">
-            <div class="booktitle">
+            <div class="booktitle" style="word-wrap: break-word;">
               <!-- Don't Make Me Think -->
               {{ book.bookName }}
             </div>
 
-            <div class="sub">{{ book.bookAuthor }}</div>
-            <div style="font: Bold 18px/15px Lato; margin-bottom: 30px;">
+            <div class="sub" style="word-wrap: break-word;">
+              {{ book.bookAuthor }}
+            </div>
+            <div class="price" style="word-wrap: break-word;">
               <!-- Rs. 1500 -->
               Rs. {{ book.bookPrice }}
             </div>
           </div>
-          <button mat-raised-button class="button" (click)="onRemove(book)">
-            Remove
-          </button>
         </div>
+      </div>
+      <div
+        fxLayoutAlign="start end"
+        fxLayout="row wrap"
+        style="margin-left: 12%; margin-bottom: 2%;"
+      >
+        <button
+          fxLayout="column"
+          fxLayoutAlign="end start"
+          style="
+            justify-content: flex-center;
+            margin-bottom: 22px;
+            background-color: white;
+            border: none;
+            outline: none;
+            cursor: pointer;
+          "
+          class="grab"
+          (click)="addToCart(book)"
+        >
+          <div style="font: 18px/15px Lato; flex-wrap: wrap;">
+            &nbsp; Add To Cart
+          </div>
+        </button>
+
+        <button
+          style="
+            margin-bottom: 22px;
+            background-color: white;
+            border: none;
+            outline: none;
+            color: red;
+            cursor: pointer;
+          "
+          class="grab"
+          (click)="onRemove(book)"
+        >
+          <div style="font: 18px/15px Lato; flex-wrap: wrap;">
+            &nbsp; Remove
+          </div>
+        </button>
       </div>
     </div>
   </mat-card>
 </div>
-<div class="footer" *ngIf="books.length > 2; else foot">
+<div
+  style="margin-bottom: 4%;"
+  class="footer"
+  *ngIf="books.length > 2; else foot"
+>
   <app-footer></app-footer>
 </div>
 <ng-template #foot>
-  <div class="foot" style="top: 720px; margin-top: 35%;">
+  <div class="foot" style="margin-bottom: 4%;">
     <app-footer></app-footer>
   </div>
 </ng-template>

@@ -2,29 +2,48 @@
   <mat-toolbar style="background-color: #a03037;">
     <mat-toolbar-row>
       <!--------------- bookimg and book --------------------------->
-      <div style="height: 40%; margin-left: 8%;">
+      <div
+        style="height: 40%; margin-left: 8%;"
+        fxShow="true"
+        fxHide.lt-md="true"
+      >
         <a (click)="onBook()" class="bookicon">
           <mat-icon color="primary" class="grab">
             <img class="bookimg" src="assets/images/education@2x.png" />
           </mat-icon>
         </a>
-        <div class="booktext">BookStore</div>
       </div>
+      <div style="height: 40%; margin-left: -3%;" fxHide fxShow.lt-md>
+        <a (click)="onBook()" class="bookicon">
+          <mat-icon color="primary" class="grab">
+            <img class="bookimg" src="assets/images/education@2x.png" />
+          </mat-icon>
+        </a>
+      </div>
+      <div class="booktext" fxhide="10" fxHide.xs="true">BookStore</div>
+
       <!-------------------- search ------------------->
       <div class="searche">
-        <img class="scicon" src="assets/images/searchicon.png" />
+        <img
+          class="scicon"
+          src="assets/images/searchicon.png"
+          (click)="searching()"
+        />
         <input
           type="text"
           class="searchinput"
-          placeholder="search.."
+          placeholder="search"
           autocomplete="off"
           [(ngModel)]="searchText"
-          (keyup)="searching(searchText)"
+          (click)="searching()"
         />
       </div>
 
-      <div fxLayout="row" fxLayoutAlign="start end" style="margin-left: 25%;">
-        <div class="carttext" (click)="onCart()">Cart</div>
+      <!-------------------- cart -------------------->
+      <div fxLayout="row" fxLayoutAlign="start end" style="margin-left: 20%;">
+        <div class="carttext" (click)="onCart()" fxhide="10" fxHide.xs="true">
+          Cart
+        </div>
         <a (click)="onCart()" class="cartimg">
           <mat-icon
             class="grab"
@@ -38,24 +57,39 @@
         </a>
 
         <button
+          *ngIf="!profilepic"
+          mat-icon-button
+          width="30"
+          style="margin-left: 21%; background-color: whitesmoke;"
+          fxShow="true"
+          fxHide.lt-md="true"
+          [matMenuTriggerFor]="beforeMenu"
+        >
+          <mat-icon id="cartimg">perm_identity</mat-icon>
+        </button>
+
+        <button
+          *ngIf="profilepic"
           mat-icon-button
           fxShow="true"
           width="30"
           style="margin-left: 20%; background-color: whitesmoke;"
+          fxShow="true"
+          fxHide.lt-md="true"
           [matMenuTriggerFor]="beforeMenu"
         >
           <img class="profile" src="{{ profile }}" />
         </button>
 
         <mat-menu #beforeMenu="matMenu" xPosition="before">
-          <div style="width: 250px; height: 250px;">
+          <div style="width: 200px;">
             <button
               mat-menu-item
               [disabled]="!visible"
               style="text-align: center;"
               (click)="onOrderDetails()"
             >
-              MyOrders
+              My Orders
             </button>
             <button
               mat-menu-item
@@ -63,32 +97,100 @@
               style="text-align: center;"
               (click)="onwhishlist()"
             >
-              MyWhishList
+              My WishList
             </button>
-            <button
-              mat-menu-item
-              style="text-align: center;"
-              (click)="onLogin()"
-            >
-              LogIn
-            </button>
+            <div *ngIf="!visible">
+              <button
+                mat-menu-item
+                style="text-align: center;"
+                (click)="onLogin()"
+              >
+                Login
+              </button>
+            </div>
             <button
               mat-menu-item
               [disabled]="!visible"
               style="text-align: center;"
               (click)="onLogout()"
             >
-              LogOut
+              Logout
             </button>
 
-            <label class="btn-upload">
+            <!-- <label> -->
+            <button
+              [disabled]="!visible"
+              value="uploadProfile"
+              class="uploadimage"
+              (click)="fileInput.click($event)"
+            >
+              Upload Profile
+              <input
+                style="display: none;"
+                #fileInput
+                type="file"
+                name="fileupload"
+                (change)="fileChange($event)"
+              />
+            </button>
+            <!-- </label> -->
+          </div>
+        </mat-menu>
+        <!--------------- app ---------------->
+        <button
+          mat-icon-button
+          class="apps"
+          [matMenuTriggerFor]="menu"
+          fxHide
+          fxShow.lt-md
+        >
+          <mat-icon matTooltip="appearance" [ngStyle]="{ color: 'white' }"
+            >apps</mat-icon
+          >
+          <mat-menu #menu="matMenu">
+            <div style="width: 200px;">
+              <button
+                mat-menu-item
+                [disabled]="!visible"
+                style="text-align: center;"
+                (click)="onOrderDetails()"
+              >
+                My Orders
+              </button>
+              <button
+                mat-menu-item
+                [disabled]="!visible"
+                style="text-align: center;"
+                (click)="onwhishlist()"
+              >
+                My WishList
+              </button>
+              <div *ngIf="!visible">
+                <button
+                  mat-menu-item
+                  style="text-align: center;"
+                  (click)="onLogin()"
+                >
+                  Login
+                </button>
+              </div>
+              <button
+                mat-menu-item
+                [disabled]="!visible"
+                style="text-align: center;"
+                (click)="onLogout()"
+              >
+                Logout
+              </button>
+
+              <!-- <label> -->
               <button
                 [disabled]="!visible"
                 value="uploadProfile"
                 class="uploadimage"
                 (click)="fileInput.click($event)"
               >
-                uploadProfile
+                Upload Profile
                 <input
                   style="display: none;"
                   #fileInput
@@ -97,9 +199,10 @@
                   (change)="fileChange($event)"
                 />
               </button>
-            </label>
-          </div>
-        </mat-menu>
+              <!-- </label> -->
+            </div>
+          </mat-menu>
+        </button>
       </div>
     </mat-toolbar-row>
   </mat-toolbar>

@@ -32,44 +32,23 @@ export class OrderDetailsComponent implements OnInit {
 
   quantitylist: [];
 
-  bookincart: number;
+  //bookincart: number;
   myDatas = new Array();
   bookcount: number;
-
-  BookCount() {
-    this.userService
-      .getRequest(
-        environment.orderlist_books_Count + localStorage.getItem("token")
-      )
-      .subscribe(
-        (Response: any) => {
-          console.log(Response);
-          this.bookcount = Response.obj;
-          this.snackbar.open(Response.message, "undo", { duration: 2500 });
-        },
-        (error: any) => {
-          console.error(error);
-          console.log(error.error.message);
-          this.snackbar.open(error.error.message, "undo", { duration: 2500 });
-        }
-      );
-  }
 
   orderId = new Array();
   count = 0;
   onOrderlist() {
-    this.token = localStorage.getItem("token");
-
     this.userService
-      .getRequest(environment.orderlist_books + this.token)
+      .getRequest(environment.orderlist_books + localStorage.getItem("token"))
       .subscribe(
         (Response: any) => {
-          console.log(Response);
+          //console.log(Response);
           for (var len in Response.obj) {
+            this.count += 1;
             this.books = Response.obj[len];
-            this.orderId.push(Response.obj[0]["orderId"]);
+
             let res = this.books["booksList"];
-            console.log(this.books["booksList"]);
             this.myDatas.push(this.books["booksList"]);
             /**
              * bookdetails
@@ -77,15 +56,13 @@ export class OrderDetailsComponent implements OnInit {
             for (var index in res) {
               this.book = res[index]; //book details
               this.book.orderId = this.books["orderId"];
+              this.book.totalPrice = this.books["totalPrice"];
               this.myDatas.push(this.book);
-              console.log(this.count++);
             }
           }
-          console.log(this.myDatas);
+          //console.log(this.myDatas);
         },
         (error: any) => {
-          console.error(error);
-          console.log(error.error.message);
           this.snackbar.open(error.error.message, "undo", { duration: 2500 });
         }
       );

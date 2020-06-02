@@ -6,6 +6,8 @@ import { AddressService } from "src/app/service/address.service";
 import { Book } from "src/app/models/book";
 import { environment } from "src/environments/environment";
 import { UserService } from "src/app/service/user.service";
+import { BookService } from "src/app/service/book.service";
+import { DataService } from "src/app/service/data.service";
 
 @Component({
   selector: "app-whishlist",
@@ -13,14 +15,12 @@ import { UserService } from "src/app/service/user.service";
   styleUrls: ["./whishlist.component.scss"],
 })
 export class WhishlistComponent implements OnInit {
-  images = [{}, {}, {}, {}];
   constructor(
-    private spinner: NgxSpinnerService,
-    private route: ActivatedRoute,
-    private router: Router,
     private snackbar: MatSnackBar,
+    private data: DataService,
     private userService: UserService,
-    private addressService: AddressService
+    private bookService: BookService,
+    private _matSnackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -28,11 +28,23 @@ export class WhishlistComponent implements OnInit {
     this.onwhishlist();
   }
 
+  addToCart(book: any) {
+    this.bookService.addToCart(book.bookId).subscribe((response: any) => {
+      console.log(response["obj"]);
+      this.onRemove(book);
+
+      this.data.changeMessage("count");
+      this._matSnackBar.open("Book added to cart", "ok", {
+        duration: 1000,
+      });
+    });
+  }
+
   bookcount: number;
   BookCount() {
     this.userService.getRequest(environment.whishList_book_count).subscribe(
       (Response: any) => {
-        console.log(Response);
+        //console.log(Response);
         this.bookcount = Response.obj;
         this.snackbar.open(Response.message, "undo", { duration: 2500 });
       },
@@ -54,14 +66,12 @@ export class WhishlistComponent implements OnInit {
   onwhishlist() {
     this.userService.getRequest(environment.whishlist_books).subscribe(
       (Response: any) => {
-        console.log(Response);
+        // console.log(Response);
         this.books = Response.obj;
-        console.log(this.books);
+        //console.log(this.books);
         this.snackbar.open(Response.message, "undo", { duration: 2500 });
       },
       (error: any) => {
-        console.error(error);
-        console.log(error.error.message);
         this.snackbar.open(error.error.message, "undo", { duration: 2500 });
       }
     );
@@ -69,7 +79,7 @@ export class WhishlistComponent implements OnInit {
 
   count: boolean = true;
   onRemove(book: any) {
-    console.log(book);
+    // console.log(book);
     this.token = localStorage.getItem("token");
     this.userService
       .deleteRequest(
@@ -78,9 +88,9 @@ export class WhishlistComponent implements OnInit {
       )
       .subscribe(
         (Response: any) => {
-          console.log(Response);
+          //console.log(Response);
           this.books = Response.obj;
-          console.log(this.books);
+          //console.log(this.books);
           this.bookcount -= 1;
           this.count = false;
           this.snackbar.open(Response.message, "undo", { duration: 2500 });

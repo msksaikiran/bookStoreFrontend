@@ -11,7 +11,8 @@ import {
 } from "@angular/router";
 import { Observable } from "rxjs";
 import decode from "jwt-decode";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar, MatDialog } from "@angular/material";
+import { LoginComponent } from "src/app/components/login/login.component";
 
 @Injectable({
   providedIn: "root",
@@ -20,7 +21,9 @@ export class AuthGuardService implements CanActivate {
   constructor(
     private _authService: AuthService,
     private _router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router,
+    public dialog: MatDialog
   ) {}
 
   canActivate(
@@ -45,31 +48,13 @@ export class AuthGuardService implements CanActivate {
     }
 
     //this.snackBar.open("Please Login First...", "undo", { duration: 25000 });
-    // navigate to login page
+
+    // const dialogRef = this.dialog.open(LoginComponent);
+    // this.router.events.subscribe(() => {
+    //   dialogRef.close();
+    // });
     this._router.navigate(["/login"]);
-    alert("Please Login First.");
     return false;
   }
   //throw new Error("Method not implemented.");
 }
-
-//   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-
-//     if (this._authService.isAuthenticated()) {
-
-//       //validating the token by decoding.
-//       try {
-//         decode(localStorage.getItem('token'));
-//       } catch (error) {
-//         this.snackBar.open("Login Failed Invaid token", "undo", { duration: 25000 });
-//       }
-
-//         return true;
-//     }
-
-//     //navigate to login page
-//     this._router.navigate(['/login']);
-//     return false;
-//   }
-
-// }

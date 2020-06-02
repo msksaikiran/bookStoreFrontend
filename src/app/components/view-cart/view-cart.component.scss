@@ -10,13 +10,14 @@ container {
 }
 .cartdetails {
   display: flex;
-  margin-left: 36px;
+  margin-left: 5%;
+  margin-bottom: 5px;
   position: relative;
 }
 .bookdetails {
   display: flex;
   flex-direction: column;
-  margin-left: 50px;
+  margin-left: 6%;
 }
 .mycart {
   top: 135px;
@@ -27,7 +28,7 @@ container {
   font: bold;
 }
 .booktitle {
-  width: 161px;
+  width: 80%;
   text-align: left;
   letter-spacing: 0px;
   color: #0a0102;
@@ -53,12 +54,12 @@ container {
   opacity: 1;
 }
 .booktitle2 {
-  width: 190px;
+  width: 80%;
   text-align: left;
   letter-spacing: 0px;
   color: #0a0102;
   opacity: 1;
-  margin-left: 17%;
+  display: flex;
   position: relative;
 }
 
@@ -68,11 +69,18 @@ container {
   margin-bottom: 15%;
   margin-top: 5%;
 }
+.sub2 {
+  color: #9d9d9d;
+  opacity: 1;
+  margin-bottom: 15%;
+  margin-top: 5%;
+  width: 60%;
+}
 
 .mat {
   display: flex;
   flex-direction: column;
-  width: 774px;
+  width: 69%;
   border: 1px solid #9d9d9d;
   border-radius: 3px;
   //opacity: 1.1;
@@ -80,7 +88,7 @@ container {
 .mat2 {
   display: flex;
   flex-direction: column;
-  width: 774px;
+  width: 69%;
   margin-bottom: 100px;
   border: 1px solid #9d9d9d;
   border-radius: 3px;
@@ -94,9 +102,9 @@ container {
 }
 .matcard1 {
   background: #ffffff 0% 0% no-repeat padding-box;
-  display: flex;
+  //display: flex;
   flex-direction: column;
-  width: 774px;
+  width: 69%;
   border: 1px solid #9d9d9d;
   border-radius: 3px;
   //opacity: 1;
@@ -105,7 +113,7 @@ container {
   background: #ffffff 0% 0% no-repeat padding-box;
   display: flex;
   flex-direction: column;
-  width: 774px;
+  width: 69%;
   padding-bottom: 4.2%;
   border: 1px solid #9d9d9d;
   border-radius: 3px;
@@ -115,7 +123,7 @@ container {
   background: #ffffff 0% 0% no-repeat padding-box;
   display: flex;
   flex-direction: column;
-  width: 774px;
+  width: 69%;
   margin-bottom: 50px;
   border: 1px solid #9d9d9d;
   border-radius: 3px;
@@ -133,14 +141,29 @@ container {
   height: 40px;
 }
 .address {
-  width: 512px;
+  width: 72%;
   height: 80px;
 }
 
 .input {
-  width: 251px;
-  height: 69px;
+  width: 35%;
+  //margin-right: 42px;
 }
+.input2 {
+  // width: 251px;
+  // height: 69px;
+  //flex-wrap: wrap;
+  //width: 80%;
+  width: 90%;
+  // height: 45px;
+}
+.custom-color.mat-select-value {
+  color: green;
+}
+.login-wrapper .example-full-width {
+  width: 100%;
+}
+
 .fieldtop {
   margin-top: 21px;
   margin-left: 36px;
@@ -149,8 +172,8 @@ container {
 .bookimg {
   top: 192px;
   left: 213px;
-  width: 65px;
-  height: 90px;
+  width: 85px;
+  height: 110px;
 }
 .checkout {
   border-radius: 3px;
@@ -162,9 +185,7 @@ container {
   margin-top: 21px;
   margin-left: 36px;
 }
-// .footer {
-//   width: 150%;
-// }
+
 .editbutton {
   margin-left: 714px;
   margin-top: -21px;
@@ -186,7 +207,7 @@ container {
 
   // input outline color
   .mat-form-field-appearance-outline .mat-form-field-outline {
-    color: rgb(115, 119, 115) !important;
+    color: #A03037(115, 119, 115) !important;
   }
 
   // mat-input focused color
@@ -219,7 +240,7 @@ container {
 
   // mat-label focused style
   .mat-form-field.mat-focused .mat-form-field-label {
-    color: #a03037 !important;
+    color: #0a0102 !important;
   }
 
   // mat-label error style
@@ -228,14 +249,38 @@ container {
   }
 }
 .grab {
-  cursor: -webkit-grab;
-  cursor: grab;
+  cursor: pointer;
 }
 .footer {
   text-align: center;
   color: #fff;
   bottom: 0;
-  width: 100%;
-  max-height: 100%;
-  margin-top: 190px;
+  max-height: 60%;
+  margin-top: 160px;
+  margin-right: 8%;
+}
+.totalprice {
+  font: Bold 15px/15px Lato;
+  margin-bottom: 10px;
+}
+.totalprice2 {
+  //font: Bold 18px/15px Lato;
+  margin-bottom: 30px;
+}
+@media (min-width: 728px) {
+  .footer {
+    margin-right: 13%;
+    margin-top: 272px;
+  }
+}
+@media (min-width: 1024px) {
+  .footer {
+    margin-right: 13%;
+    margin-top: 600px;
+  }
+}
+@media (max-width: 414px) {
+  .footer {
+    margin-right: 8%;
+  }
 }

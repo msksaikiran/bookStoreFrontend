@@ -6,9 +6,12 @@ import { HttpService } from "src/app/service/http.service";
 import { NgxSpinnerService } from "ngx-spinner";
 import { environment } from "src/environments/environment";
 import { ViewcartService } from "src/app/service/viewcart.service";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar, MatDialog } from "@angular/material";
 import { DataService } from "src/app/service/data.service";
 import { UserService } from "src/app/service/user.service";
+import { BooksComponent } from "../books/books.component";
+import { LoginComponent } from "../login/login.component";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @Component({
   selector: "app-dashboard",
@@ -22,25 +25,43 @@ export class DashboardComponent implements OnInit {
     private httpservice: HttpService,
     private spinner: NgxSpinnerService,
     private cartService: ViewcartService,
-    private userService: UserService,
     private data: DataService,
+    private userService: UserService,
     private snackbar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {}
 
   visible: boolean;
+  appName: string;
+  profilepic: boolean = false;
   ngOnInit() {
+    this.data.currentMessage.subscribe((message) => {
+      if ((message = "count")) {
+        this.getcountofbooks();
+      } else if ((message = "removeBook")) {
+        this.getcountofbooks();
+      } else if ((message = "checkout")) {
+        this.getcountofbooks();
+      }
+    });
+
     if (localStorage.getItem("token") != null) {
       this.visible = true;
+    } else {
+      this.profilepic = false;
     }
     this.getcountofbooks();
     this.getprofileLink();
-    this.profile = localStorage.getItem('userimage');
+    this.profile = localStorage.getItem("userimage");
+    // this.books.countMessage.subscribe((response) => {
+    // (this.bookcount = response), console.log(this.bookcount);
+    // });
   }
 
   onBook() {
     this.router.navigate(["books"]);
-    this.getcountofbooks();
+    //this.getcountofbooks();
   }
   showSpinner = false;
   onCart() {
@@ -48,8 +69,17 @@ export class DashboardComponent implements OnInit {
     this.showSpinner = true;
     setTimeout(() => {
       this.spinner.hide();
-      this.getcountofbooks();
-      this.router.navigate(["books/viewcart"]);
+      if (localStorage.getItem("token") != null) {
+        this.router.navigate(["books/viewcart"]);
+      } else {
+        const dialogRef = this.dialog.open(LoginComponent);
+        dialogRef.afterClosed().subscribe((result) => {
+          window.location.reload();
+        });
+        this.snackbar.open("please login", "ok", {
+          duration: 1000,
+        });
+      }
     }, 1000);
   }
   onwhishlist() {
@@ -68,8 +98,12 @@ export class DashboardComponent implements OnInit {
       this.router.navigate(["books/orderdetails"]);
     }, 1000);
   }
+
   onLogin() {
-    this.router.navigate(["login"]);
+    const dialogRef = this.dialog.open(LoginComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      window.location.reload();
+    });
   }
   onLogout() {
     localStorage.clear();
@@ -77,52 +111,54 @@ export class DashboardComponent implements OnInit {
     this.getcountofbooks();
     this.spinner.show();
     this.showSpinner = true;
+
     setTimeout(() => {
       this.spinner.hide();
-      this.router.navigate(["books"]);
+      this.bookcount = 0;
+      this.router.navigate(["/books"]);
+      window.location.reload();
     }, 1000);
   }
-
-  searching(searchText: any) {
-    this.router.navigate(["/books/search"], {
-      queryParams: { searchText: searchText },
-    });
+  myInput = new FormControl();
+  private obtainNotes = new BehaviorSubject([]);
+  currentMessage = this.obtainNotes.asObservable();
+  searching() {
+    this.appName = "Search";
+    this.httpservice
+      .getMethod(
+        environment.baseUrl + "book/bookorauthorname?text=" + this.searchText,
+        this.httpservice.httpOptions
+      )
+      .subscribe((response: any) => {
+        this.obtainNotes.next(response.obj);
+        this.router.navigate(["/books/search"]);
+      });
   }
 
-  bookcount: number;
+  bookcount: any;
   token: string;
   // placeOrder: boolean = true;
   getcountofbooks() {
-    console.log("cart.......");
     this.token = localStorage.getItem("token");
-    this.cartService.getRequest(environment.book_count_cart).subscribe(
-      (Response: any) => {
+    this.cartService
+      .getRequest(environment.book_count_cart)
+      .subscribe((Response: any) => {
         this.bookcount = Response.obj;
-        // if (this.bookcount == 0) {
-        //   this.placeOrder = false;
-        // }
-      },
-      (error: any) => {
-        //console.error(error);
-        console.log(error.error.message);
-        this.snackbar.open(error.error.message, "undo", { duration: 2500 });
-      }
-    );
+      });
   }
 
   profile: String;
+
   getprofileLink() {
     this.userService.getRequest(environment.user_profile).subscribe(
       (Response: any) => {
         this.profile = Response.obj;
-        // if (this.bookcount == 0) {
-        //   this.placeOrder = false;
-        // }
+        if (this.profile != null) {
+          this.profilepic = true;
+        }
       },
       (error: any) => {
-        //console.error(error);
-        console.log(error.error.message);
-        this.snackbar.open(error.error.message, "undo", { duration: 2500 });
+        this.snackbar.open("", "undo", { duration: 2500 });
       }
     );
   }
@@ -143,6 +179,7 @@ export class DashboardComponent implements OnInit {
         )
         .subscribe((response: any) => {
           localStorage.setItem("userprofile", response["msg"]);
+          this.profilepic = true;
           this.profile = response["msg"];
           console.log("upload", response);
         });

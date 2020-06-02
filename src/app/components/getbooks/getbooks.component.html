@@ -1,6 +1,6 @@
 <mat-card-content>
-  <div fxLayout="row" fxLayoutAlign="space-between end" class="bookheader">
-    <div style="font-size: 25px;" class="books">
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="bookheader">
+    <div style="font-size: 100%;" class="books">
       Books
       <small style="font-size: 12px;">( {{ length }} itmes)</small>
     </div>
@@ -12,7 +12,7 @@
         [matMenuTriggerFor]="menu"
       >
         <div
-          style="font-size: 12px; padding-bottom: 5%;"
+          style="font-size: 11px; padding-bottom: 3%;"
           (click)="doSorting(sort)"
         >
           <label>{{ sort }}</label>
@@ -26,7 +26,7 @@
       <mat-menu #menu="matMenu" class="myMenu">
         <div
           style="
-            width: 151px;
+            width: 115px;
             height: auto;
             text-align: left;
             padding-left: 8px;
@@ -104,7 +104,7 @@
     <app-footer></app-footer>
   </div>
   <ng-template #foot>
-    <div class="foot" style="top: 720px; margin-top: 34%;">
+    <div class="foot" style="top: 720px; margin-top: 45%;">
       <app-footer></app-footer>
     </div>
   </ng-template>

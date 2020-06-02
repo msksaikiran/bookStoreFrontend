@@ -2,9 +2,7 @@
   autocomplete="off"
   role="combobox"
   flex="column"
-  matTooltip="Book Title : {{ book.bookName }}, Book Author : {{
-    book.bookAuthor
-  }} ,{{ book.bookDescription }} "
+  matTooltip="Book details &#13; {{ book.bookDescription }}"
   matTooltipPosition="right"
   matTooltipClass="custom-tooltip"
 >
@@ -16,37 +14,55 @@
           fxLayoutAlign="center start"
           src="{{ book.bookImage }}"
           alt="Snow"
+          (click)="ratingAndReviews(book)"
         />
         <button *ngIf="book.noOfBooks == 0" class="btn">
           OUT OF STOCK
+        </button>
+        <button
+          *ngIf="noOfBooks < 6 && noOfBooks > 1; else available"
+          class="btn"
+        >
+          Hurry! only {{ book.noOfBooks }} books are left
+        </button>
+        <button *ngIf="noOfBooks == 1; else available" class="btn">
+          Hurry! only {{ book.noOfBooks }} book is left
         </button>
       </div>
     </mat-card-header>
   </div>
   <div class="content">
     <mat-card-content>
-      <div class="mat-title">
+      <div class="mat-title" (click)="ratingAndReviews(book)">
         {{ book.bookName }}
       </div>
-      <mat-card-subtitle style="color: #9d9d9d; margin-top: -10px;"
+      <mat-card-subtitle
+        (click)="ratingAndReviews(book)"
+        style="color: #9d9d9d; margin-top: -10px; margin-bottom: 7px;"
         >by {{ book.bookAuthor }}</mat-card-subtitle
       >
       <div class="mat-subheading-1">Rs. {{ book.bookPrice }}</div>
-      <div
-        class="mat-subheading-2"
-        *ngIf="noOfBooks < 6 && noOfBooks > 0; else available"
-      >
-        Only {{ book.noOfBooks }} books are left
-      </div>
-      <ng-template #available>
-        <div class="mat-subheading-2" *ngIf="noOfBooks > 5">
-          Available({{ book.noOfBooks }})
-        </div>
-      </ng-template>
-      <div class="mat-subheading-2" *ngIf="book.noOfBooks == 0">
-        Not available
-      </div>
     </mat-card-content>
+    <mat-card-actions
+      (click)="ratingAndReviews(book)"
+      style="margin-bottom: -0.5%; margin-top: -1%; padding: 0 34px 0 4px;"
+    >
+      <button *ngIf="totalRate > 0" class="boxx" fxLayout="row">
+        <div>
+          {{ totalRate }}
+        </div>
+        <mat-icon style="font-size: 14px; padding-top: 1.8px;">
+          star
+        </mat-icon>
+      </button>
+      <button
+        class="boxx"
+        *ngIf="totalRate == 0"
+        style="padding-right: 6px; box-shadow: aliceblue;"
+      >
+        New
+      </button>
+    </mat-card-actions>
     <mat-card-actions fxLayout="row" fxLayoutGap="7%">
       <button
         class="box1"
@@ -56,12 +72,7 @@
         ADD TO BAG
       </button>
       <ng-template #removeFromBag>
-        <button
-          *ngIf="!book.noOfBooks == 0"
-          class="added"
-          id="remove-from-bag"
-          (click)="removeFromCart()"
-        >
+        <button *ngIf="!book.noOfBooks == 0" class="added" id="remove-from-bag">
           ADDED TO BAG
         </button>
       </ng-template>
@@ -73,19 +84,24 @@
         WISHLIST
       </button>
       <button
-        class="boxwhish"
-        *ngIf="book.isListed && !book.isAdded"
-        (click)="removeFromWishlist()"
+        class="box"
+        *ngIf="book.isListed && !book.isAdded && book.noOfBooks != 0"
       >
         IN WISHLIST
       </button>
       <button
-        *ngIf="book.noOfBooks == 0"
+        *ngIf="book.noOfBooks == 0 && !book.isListed"
         class="boxOutOfStockWishList"
         id="add-to-wishlist"
         (click)="addToWishlist()"
       >
         WISHLIST
+      </button>
+      <button
+        class="inwish"
+        *ngIf="book.isListed && !book.isAdded && book.noOfBooks == 0"
+      >
+        IN WISHLIST
       </button>
     </mat-card-actions>
   </div>

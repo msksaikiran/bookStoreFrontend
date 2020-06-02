@@ -52,7 +52,20 @@ import { OrderDetailsComponent } from "./components/order-details/order-details.
 import { VerifyComponent } from "./components/verify/verify.component";
 import { MatBadgeModule } from "@angular/material/badge";
 import { SearchComponent } from "./components/search/search.component";
-import { SearchPipe } from './pipes/search.pipe';
+import { SearchPipe } from "./pipes/search.pipe";
+import { MatSelectModule } from "@angular/material/select";
+//import { RatingComponent } from "./components/rating/rating.component";
+import { GiverateComponent } from "./components/giverate/giverate.component";
+import { MatDialogModule } from "@angular/material/dialog";
+import { AddbookComponent } from "./components/addbook/addbook.component";
+import { SellerbooksComponent } from "./components/sellerbooks/sellerbooks.component";
+import { UpdatebookComponent } from "./components/updatebook/updatebook.component";
+import { AdminComponent } from "./components/admin/admin.component";
+import { VerifyconfrimComponent } from "./components/verifyconfrim/verifyconfrim.component";
+import { RatingreviewComponent } from "./components/ratingreview/ratingreview.component";
+import { AdmindashboardComponent } from "./components/admindashboard/admindashboard.component";
+import { DisApprovedBooksComponent } from "./components/dis-approved-books/dis-approved-books.component";
+import { SellerdashboardComponent } from "./components/sellerdashboard/sellerdashboard.component";
 
 @NgModule({
   declarations: [
@@ -73,9 +86,21 @@ import { SearchPipe } from './pipes/search.pipe';
     VerifyComponent,
     SearchComponent,
     SearchPipe,
+    AddbookComponent,
+    SellerbooksComponent,
+    UpdatebookComponent,
+    AdminComponent,
+    //RatingComponent,
+    GiverateComponent,
+    VerifyconfrimComponent,
+    RatingreviewComponent,
+    AdmindashboardComponent,
+    DisApprovedBooksComponent,
+    SellerdashboardComponent,
   ],
   imports: [
     BrowserModule,
+    MatDialogModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
@@ -88,6 +113,7 @@ import { SearchPipe } from './pipes/search.pipe';
     MatCardModule,
     MatButtonModule,
     MatSidenavModule,
+    MatSelectModule,
     MatListModule,
     MatMenuModule,
     MatTableModule,
@@ -105,7 +131,14 @@ import { SearchPipe } from './pipes/search.pipe';
     MatBadgeModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [BooksComponent],
+  exports: [AddbookComponent, UpdatebookComponent, LoginComponent],
+  entryComponents: [
+    AddbookComponent,
+    UpdatebookComponent,
+    RatingreviewComponent,
+    LoginComponent,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

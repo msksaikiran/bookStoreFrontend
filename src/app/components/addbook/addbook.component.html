@@ -1,0 +1,95 @@
+<!-- <h1>Add Book Seller</h1>
+
+<form>
+  <label for="name">Name</label>
+  <input type="text" class="form-control" id="name" placeholder="Book Name" [(ngModel)]="addbook.name" name="name">
+
+  <label for="author">Author</label>
+  <input type="text" class="form-control" id="author" placeholder="author" name="author" [(ngModel)]="addbook.author">
+
+  <label for="author">Price</label>
+  <input type="text" class="form-control" id="price" placeholder="price" name="price" [(ngModel)]="addbook.price">
+    <br>
+    <input type="file" (change)="onFileChanged($event)">
+    <img [src]="imgURL" height="200" width="200" *ngIf="imgURL">
+
+  <br>
+  <button type="button" class="btn btn-success" (click)="saveBook()">Save Book</button>
+</form> -->
+
+<!-- <div fxLayout="row" fxLayoutAlign="center center"> -->
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="box" >
+      <mat-card-header  >
+        <mat-card-title>Addbook</mat-card-title>
+      </mat-card-header>
+      <br>
+      <form class="example-form">
+          <!-- --------------------(Bookname)---------------------------- -->
+          <mat-form-field appearance="outline"  class="example-full-width2" >
+            <mat-label>Bookname</mat-label>
+            <mat-error *ngIf="bookName.invalid"> {{bookNameValidation()}}</mat-error>
+            <input type="name" matInput placeholder="Enter your Bookname" [formControl]="bookName"   [(ngModel)]="addbooks.bookName"  autocomplete="off" required>
+            <mat-icon matSuffix >book</mat-icon>
+            <!-- <mat-hint>Name</mat-hint> -->
+          </mat-form-field>
+          <!-- --------------------(Bookauthour)---------------------------- -->
+          <mat-form-field appearance="outline" class="example-full-width2">
+              <mat-label >Bookauthour</mat-label>
+              <mat-error *ngIf="bookAuthor.invalid"> {{bookAuthorValidation()}}</mat-error>
+              <input type="name" matInput placeholder="Enter your Bookauthour"   [(ngModel)]="addbooks.bookAuthor" [formControl]="bookAuthor"  autocomplete="off" required>
+              <mat-icon matSuffix >person</mat-icon>
+              <!-- <mat-hint>Email</mat-hint> -->
+            </mat-form-field>
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" >
+            <!-- --------------------(Bookprice)---------------------------- -->
+           <mat-form-field appearance="outline" class="example-full-width3">
+          <mat-label >price</mat-label>
+          <mat-error *ngIf="bookPrice.invalid"> {{bookPriceValidation()}}</mat-error>
+          <input type="number" matInput placeholder=" price" [(ngModel)]="addbooks.bookPrice"
+          [formControl]="bookPrice"
+             required>
+             <mat-icon matSuffix> <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M8,3H18L17,5H13.74C14.22,5.58 14.58,6.26 14.79,7H18L17,9H15C14.75,11.57 12.74,13.63 10.2,13.96V14H9.5L15.5,21H13L7,14V12H9.5V12C11.26,12 12.72,10.7 12.96,9H7L8,7H12.66C12.1,5.82 10.9,5 9.5,5H7L8,3Z" />
+          </svg>
+        </mat-icon>
+             <!-- <mat-icon matPrefix style="margin-right: 20px;">rupee</mat-icon> -->
+          <!-- <mat-hint>Password</mat-hint> -->
+        </mat-form-field>
+        <!-- --------------------(noOfBooks)---------------------------- -->
+        <mat-form-field appearance="outline"  class="example-full-width4">
+          <mat-label>noOfBooks</mat-label>
+          <mat-error *ngIf="noOfBooks.invalid"> {{noOfBooksValidation()}}</mat-error>
+          <input type="text"   matInput placeholder="Enter your noofBooks" [(ngModel)]="addbooks.noOfBooks" [formControl]="noOfBooks" autocomplete="off" required>
+          <!-- <mat-hint>mobileNumber</mat-hint> -->
+          <mat-icon matSuffix >pets</mat-icon>
+        </mat-form-field>
+      </div>
+
+        <mat-form-field appearance="outline"  class="example-full-width5">
+            <mat-label>bookDescription</mat-label>
+            <mat-error *ngIf="addbooks.invalid"> {{bookDescriptionValidation()}}</mat-error>
+            <input type="text"   matInput placeholder="Enter your bookDescription" [(ngModel)]="addbooks.bookDescription" 
+            [formControl]="bookDescription"autocomplete="off" required>
+            <!-- <mat-hint>mobileNumber</mat-hint> -->
+            <mat-icon matSuffix >edit</mat-icon>
+          </mat-form-field>
+          
+        <!-- <div   fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="130px" >
+          
+        <button   mat-button  class="btn-block1" routerLink="/login">Sign in
+         </button>
+         <button  mat-button  (click)="saveBook()">Sign Up</button>
+      </div>-->
+      <input type="file" (change)="onFileChanged($event)">
+    <img [src]="imgURL" height="50" width="50" *ngIf="imgURL">
+</form>
+<br>
+<button [disabled]=" bookName.invalid ||bookAuthor.invalid || bookPrice.invalid || bookDescription.invalid || noOfBooks.invalid"   mat-button    (click)="saveBook()">ADD NEW BOOK
+       </button>
+  
+  <!-- <button type="button" class="btn btn-success" (click)="saveBook()">Save Book</button> -->
+       
+  </mat-card>
+  </div>
+<!-- </div> -->

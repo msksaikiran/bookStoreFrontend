@@ -14,6 +14,16 @@ import { BooksComponent } from "./components/books/books.component";
 import { OrderDetailsComponent } from "./components/order-details/order-details.component";
 import { SearchComponent } from "./components/search/search.component";
 import { VerifyComponent } from "./components/verify/verify.component";
+import { AddbookComponent } from "./components/addbook/addbook.component";
+import { SellerbooksComponent } from "./components/sellerbooks/sellerbooks.component";
+import { AdminComponent } from "./components/admin/admin.component";
+//import { RatingComponent } from "./components/rating/rating.component";
+import { VerifyconfrimComponent } from "./components/verifyconfrim/verifyconfrim.component";
+import { RatingreviewComponent } from "./components/ratingreview/ratingreview.component";
+import { AdmindashboardComponent } from "./components/admindashboard/admindashboard.component";
+import { DisApprovedBooksComponent } from "./components/dis-approved-books/dis-approved-books.component";
+import { GiverateComponent } from "./components/giverate/giverate.component";
+import { SellerdashboardComponent } from "./components/sellerdashboard/sellerdashboard.component";
 
 const routes: Routes = [
   {
@@ -33,27 +43,48 @@ const routes: Routes = [
     component: RestpasswordComponent,
   },
   {
+    path: "verifybook",
+    component: VerifyconfrimComponent,
+  },
+  {
     path: ":role/registration/verify/:token",
     component: VerifyComponent,
   },
   {
+    path: "seller/books",
+    component: SellerdashboardComponent,
+  },
+  {
+    path: "admin",
+    component: AdmindashboardComponent,
+    children: [
+      {
+        path: "books",
+        component: AdminComponent,
+      },
+      {
+        path: "disapprovebooks",
+        component: DisApprovedBooksComponent,
+      },
+    ],
+  },
+  {
     path: "",
     component: DashboardComponent,
-    //canActivateChild: [AuthGuardService],
     children: [
       { path: "", redirectTo: "/books", pathMatch: "full" },
       { path: "books", component: GetbooksComponent },
       { path: "books/search", component: SearchComponent },
       {
         path: "books/viewcart",
-        canActivate: [AuthGuardService],
+        //canActivate: [AuthGuardService],
         component: ViewCartComponent,
       },
       {
-        path: "books/ordersucess",
-        canActivate: [AuthGuardService],
+        path: "books/ordersucess/:orderId",
         component: OrderSuccessComponent,
       },
+
       {
         path: "books/whishlist",
         component: WhishlistComponent,
@@ -61,6 +92,14 @@ const routes: Routes = [
       {
         path: "books/orderdetails",
         component: OrderDetailsComponent,
+      },
+      {
+        path: "books/rating/:bookId",
+        component: RatingreviewComponent,
+      },
+      {
+        path: "books/ratingandreview/:bookId",
+        component: GiverateComponent,
       },
     ],
   },

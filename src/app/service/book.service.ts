@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpService } from "./http.service";
 import { environment } from "src/environments/environment";
-import { HttpParams } from "@angular/common/http";
+import { HttpParams, HttpHeaders, HttpClient } from "@angular/common/http";
 import { Subject, BehaviorSubject } from "rxjs";
 import { tap } from "rxjs/operators";
 
@@ -9,7 +9,7 @@ import { tap } from "rxjs/operators";
   providedIn: "root",
 })
 export class BookService {
-  constructor(private http_service: HttpService) {}
+  constructor(private http_service: HttpService, private http: HttpClient) {}
   private subject = new Subject<any>();
   private content = new BehaviorSubject<number>(0);
   public share = this.content.asObservable();
@@ -22,6 +22,27 @@ export class BookService {
       data,
       {}
     );
+  }
+  getAvailableSellerBooks() {
+    return this.http_service
+      .getMethod(
+        environment.baseUrl + "seller/sellerbooks/?pageNo=" + 1,
+        this.http_service.httpOptions
+      )
+      .pipe(
+        tap(() => {
+          this.subject.next();
+        })
+      );
+  }
+  getUnverifiedBooks() {
+    return this.http_service
+      .getbookMethod(environment.baseUrl + "/book/bookdetails/unverified", "")
+      .pipe(
+        tap(() => {
+          this.subject.next();
+        })
+      );
   }
   getAvailableBooks() {
     let params = new HttpParams();
@@ -93,23 +114,84 @@ export class BookService {
   }
   getBooksCount() {
     return this.http_service.getMethod(
-      environment.baseUrl + environment.GET_BOOKS_COUNT + "/" + "get",
+      environment.baseUrl + environment.GET_BOOKS_COUNT,
       ""
     );
   }
   isAddedTocart(bookId: number) {
     return this.http_service.getMethod(
-      environment.baseUrl + environment.VERIFY_CART_BOOK + "?bookId=" + bookId,
-      this.http_service.httpOptions
+      environment.baseUrl +
+        environment.VERIFY_CART_BOOK +
+        localStorage.getItem("token") +
+        "/" +
+        "?bookId=" +
+        bookId,
+      {}
     );
+  }
+  private _refreshNeeded$ = new Subject<void>();
+  get refreshNeeded$() {
+    return this._refreshNeeded$;
+  }
+
+  public addBook(data: any): any {
+    console.log("service add book");
+    return this.http
+      .post("http://localhost:8080/book/addbook", data, {
+        headers: new HttpHeaders().set("token", localStorage.getItem("token")),
+      })
+      .pipe(
+        tap(() => {
+          this.subject.next();
+        })
+      );
+  }
+  public updateBook(url: any, data: any): any {
+    console.log("service add book");
+    return this.http.put("http://localhost:8080/book/update/" + url, data, {
+      headers: new HttpHeaders().set("token", localStorage.getItem("token")),
+    });
   }
   isAddedToWishList(bookId: number) {
     return this.http_service.getMethod(
       environment.baseUrl +
         environment.VERIFY_WHISHLIST_BOOK +
+        localStorage.getItem("token") +
+        "/" +
         "?bookId=" +
         bookId,
+      {}
+    );
+  }
+  public getAvailableBooksOfPageFromSeller(pageNo: any) {
+    return this.http_service.getMethod(
+      environment.baseUrl + "seller/sellerbooks/?pageNo=" + pageNo,
       this.http_service.httpOptions
+    );
+  }
+  public getBookById(bookId: number) {
+    return this.http_service.getMethod(
+      environment.baseUrl + "book/bookdetails/" + bookId,
+      {}
+    );
+  }
+  public ratingandreview(bookId: Number, data: any) {
+    return this.http_service
+      .putMethod(
+        environment.baseUrl + environment.WRITE_REVIEW + bookId,
+        data,
+        this.http_service.httpOptions
+      )
+      .pipe(
+        tap(() => {
+          this.subject.next();
+        })
+      );
+  }
+  public getratingandreview(bookId: number) {
+    return this.http_service.getMethod(
+      environment.baseUrl + environment.GET_REVIEWS + bookId,
+      {}
     );
   }
 }

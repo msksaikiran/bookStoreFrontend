@@ -1,32 +1,37 @@
-<div role="combobox" flex="column" style="margin-left: 16%;">
+<div flex="column" style="margin-left: 16%;">
   <mat-card class="matcard1" [ngClass]="open == true ? 'matcardincr' : 'dummy'">
     <div *ngIf="count" class="mycart">My cart&nbsp;({{ bookcount }})</div>
     <div *ngIf="!count" class="mycart">My cart&nbsp;({{ bookcount }})</div>
     <div *ngFor="let book of bookNquantityData">
-      <div *ngIf="book.bookName != null">
+      <div *ngIf="book != null">
         <div class="cartdetails" fxLayout="row" fxLayoutAlign="start start">
-          <!-- "assets/images/Image 11@2x.png" -->
           <img class="bookimg" src="{{ book.bookImage }}" />
           <div class="bookdetails">
-            <div class="booktitle">
-              <!-- Don't Make Me Think -->
+            <div class="booktitle" style="word-wrap: break-word;">
               {{ book.bookName }}
             </div>
-            <!-- <div class="subtitle" fxLayout="column" fxLayoutAlign="center start"> -->
-            <div class="sub">{{ book.bookAuthor }}</div>
-            <div style="margin-bottom: 30px; font: Bold 18px/15px Lato;">
+            <div class="sub" style="word-wrap: break-word;">
+              {{ book.bookAuthor }}
+            </div>
+            <!-- <div style="margin-bottom: 30px; font: Bold 18px/15px Lato;">
+              Rs. {{ book.bookPrice }}
+            </div> -->
+            <div class="totalprice" fxLayout="row wrap">
               Rs. {{ book.bookPrice }}
             </div>
           </div>
         </div>
 
         <div
-          fxLayout="row"
-          fxLayoutAlign="center center"
-          fxLayOutGap="10px"
-          style="margin-right: 280px; margin-bottom: 20px;"
+          fxLayout="row wrap"
+          style="
+            justify-content: flex-center;
+            margin-left: 19%;
+            margin-bottom: 22px;
+          "
         >
-          <div>
+          <!-- <div fxLayout="row" style="margin-bottom: 20px;"> -->
+          <div style="margin-top: -3px;">
             <button mat-icon-button (click)="ondescQuantity(book)">
               <mat-icon>remove_circle_outline</mat-icon>
             </button>
@@ -34,17 +39,19 @@
           <div *ngFor="let quaty of book.quantitybto">
             <div class="quantity">{{ quaty.quantityOfBook }}</div>
           </div>
-          <div>
+          <div style="margin-top: -3px;">
             <button mat-icon-button (click)="onQuantity(book)">
               <mat-icon>add_circle_outline</mat-icon>
             </button>
           </div>
           <button
-            mat-icon-button
+            class="grab"
             (click)="onRemove(book)"
             style="background-color: white; border: none; outline: none;"
           >
-            <div style="font: 18px/15px Lato;">&nbsp; Remove</div>
+            <div style="font: 18px/15px Lato; flex-wrap: wrap;">
+              &nbsp; Remove
+            </div>
           </button>
         </div>
       </div>
@@ -84,171 +91,368 @@
       </div>
       <!--------------------- Name ------------------------>
     </button>
-
-    <div class="custom">
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <mat-form-field appearance="outline" class="input">
-          <mat-label>Name</mat-label>
-          <mat-error *ngIf="name.invalid"> {{ nameValidation() }}</mat-error>
-          <input
-            type="text"
-            matInput
-            placeholder="Enter your Name"
-            required
-            [(ngModel)]="addModel.name"
-            [disabled]="!fields"
-          />
-        </mat-form-field>
-        <!------------------------ phoneNumber ------------------>
-        <div style="margin-left: 7px;">
-          <!-- &nbsp; -->
+    <form [formGroup]="customerForm" (ngSubmit)="(customerForm.valid)">
+      <div class="custom" fxShow="true" fxHide.lt-md="true">
+        <div
+          fxLayout="row wrap"
+          fxLayoutGap="20px"
+          style="justify-content: flex-start;"
+          fxLayoutAlign="flex-start"
+          style="margin-bottom: -13px;"
+        >
+          <!--  -->
           <mat-form-field appearance="outline" class="input">
-            <mat-label>phoneNumber</mat-label>
-            <mat-error *ngIf="mobile.invalid">{{ phoneNumber() }}</mat-error>
+            <mat-label>Name</mat-label>
             <input
               type="text"
               matInput
+              formControlName="name"
+              placeholder="Enter your Name"
+              required
+              [(ngModel)]="addModel.name"
+            />
+          </mat-form-field>
+          <!------------------------ phoneNumber ------------------>
+
+          <mat-form-field appearance="outline" class="input">
+            <mat-label>phoneNumber</mat-label>
+            <!-- <mat-error *ngIf="mobile.invalid">{{ phoneNumber() }}</mat-error> -->
+            <input
+              type="text"
+              matInput
+              formControlName="contact"
               placeholder="Enter your phoneNumber"
               required
               [(ngModel)]="addModel.phoneNumber"
-              [disabled]="!fields"
               autocomplete="off"
             />
           </mat-form-field>
         </div>
-      </div>
-      <!------------------------------- pincode ------------------------->
+        <!------------------------------- pincode ------------------------->
 
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <mat-form-field appearance="outline" class="input">
-          <mat-label>pincode</mat-label>
-          <mat-error *ngIf="pincode.invalid">
-            {{ pincodeValidation() }}</mat-error
-          >
-          <input
-            type="text"
-            matInput
-            placeholder="Enter your pincode"
-            required
-            [(ngModel)]="addModel.pincode"
-            [disabled]="!fields"
-            autocomplete="off"
-          />
-        </mat-form-field>
-        <!---------------------------- locality ------------------------------------->
-        <div style="margin-left: 7px;">
+        <div
+          fxLayout="row wrap"
+          fxLayoutGap="20px"
+          style="justify-content: flex-start;"
+          fxLayoutAlign="flex-start"
+          style="margin-bottom: -13px;"
+        >
           <mat-form-field appearance="outline" class="input">
-            <mat-label>Locality</mat-label>
-            <mat-error *ngIf="locality.invalid">
-              {{ localityValidation() }}</mat-error
-            >
+            <mat-label>pincode</mat-label>
+            <!-- <mat-error *ngIf="pincode.invalid">
+              {{ pincodeValidation() }}</mat-error
+            > -->
             <input
               type="text"
               matInput
-              placeholder="Enter your Locality"
+              formControlName="pinCode"
+              placeholder="Enter your pincode"
               required
-              [(ngModel)]="addModel.locality"
+              [(ngModel)]="addModel.pincode"
+              autocomplete="off"
+            />
+          </mat-form-field>
+          <!---------------------------- locality ------------------------------------->
+
+          &nbsp;
+          <mat-form-field class="input">
+            <mat-label>Country</mat-label>
+            <mat-select
+              (selectionChange)="selected($event)"
+              required
+              formControlName="country"
+            >
+              <mat-option value="india">
+                India
+              </mat-option>
+              <mat-option value="america">
+                America
+              </mat-option>
+              <mat-option value="other">
+                Others
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- </div> -->
+        </div>
+
+        <!-------------------------------- address ------------------------------------------>
+        <mat-form-field appearance="outline" class="address">
+          <mat-label>Address</mat-label>
+
+          <input
+            type="text"
+            matInput
+            formControlName="address"
+            placeholder="Address"
+            required
+            [(ngModel)]="addModel.address"
+            style="height: 51px;"
+            autocomplete="off"
+          />
+        </mat-form-field>
+
+        <br />
+
+        <!---------------------------------- City ---------------------------------------->
+        <div
+          fxLayout="row wrap"
+          fxLayoutGap="20px"
+          style="justify-content: flex-start;"
+          fxLayoutAlign="flex-start"
+          style="margin-top: 27px;"
+        >
+          <mat-form-field appearance="outline" class="input">
+            <mat-label>City/town</mat-label>
+            <!-- <mat-error *ngIf="city.invalid">
+                {{ cityValidation() }}</mat-error
+              > -->
+            <input
+              type="text"
+              matInput
+              formControlName="city"
+              placeholder="Enter your city/town"
+              required
+              [(ngModel)]="addModel.city"
               [disabled]="!fields"
               autocomplete="off"
             />
           </mat-form-field>
-        </div>
-      </div>
+          <!----------------------------------- landmark ------------------------------------>
 
-      <!-------------------------------- address ------------------------------------------>
-      <mat-form-field appearance="outline" class="address">
-        <mat-label>Address</mat-label>
-        <mat-error *ngIf="address.invalid">
-          {{ addressValidation() }}</mat-error
-        >
-        <input
-          type="text"
-          matInput
-          placeholder="Address"
-          required
-          [(ngModel)]="addModel.address"
-          [disabled]="!fields"
-          style="height: 51px;"
-          autocomplete="off"
-        />
-      </mat-form-field>
-      <!-- </div> -->
-      <!-- <div class="fieldtop"> -->
-      <br />
-
-      <div
-        fxLayout="row"
-        fxLayoutAlign="start center"
-        style="margin-top: 21px;"
-      >
-        <!---------------------------------- City ---------------------------------------->
-        <mat-form-field appearance="outline" class="input">
-          <mat-label>City/town</mat-label>
-          <mat-error *ngIf="city.invalid"> {{ cityValidation() }}</mat-error>
-          <input
-            type="text"
-            matInput
-            placeholder="Enter your city/town"
-            required
-            [(ngModel)]="addModel.city"
-            [disabled]="!fields"
-            autocomplete="off"
-          />
-        </mat-form-field>
-        <!----------------------------------- landmark ------------------------------------>
-        <div style="margin-left: 7px;">
           <mat-form-field appearance="outline" class="input">
             <mat-label>Landmark</mat-label>
-            <mat-error *ngIf="landmark.invalid">{{
-              landmarkValidation()
-            }}</mat-error>
+            <!-- <mat-error *ngIf="landmark.invalid">{{
+                  landmarkValidation()
+                }}</mat-error> -->
             <input
               type="text"
               matInput
-              placeholder="Enter your landmark"
-              required
+              formControlName="landMark"
               [(ngModel)]="addModel.landmark"
-              [disabled]="!fields"
+              autocomplete="off"
+            />
+          </mat-form-field>
+          <!-- </div> -->
+        </div>
+
+        <br />
+        <div fxLayout="row" fxLayoutAlign="start center">Type</div>
+        <br />
+        <div fxLayout="column" fxLayoutAlign="start start">
+          <mat-radio-group
+            aria-label="Select an option"
+            fxLayoutGap="110px"
+            style="margin-bottom: 10px;"
+            [disabled]="!fields"
+            (change)="onChange($event)"
+          >
+            <mat-radio-button (click)="getaddress()" value="Home"
+              >Home</mat-radio-button
+            >
+            <mat-radio-button (click)="onwork()" value="Work"
+              >Work</mat-radio-button
+            >
+            <mat-radio-button [checked]="true" (click)="onOther()" value="Other"
+              >Other</mat-radio-button
+            >
+          </mat-radio-group>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="end end">
+          <button
+            mat-raised-button
+            *ngIf="!open2"
+            class="button"
+            [disabled]="!customerForm.valid"
+            (click)="onContinue()"
+          >
+            Continue
+          </button>
+        </div>
+      </div>
+    </form>
+    <!------------------------- form2 ------------------>
+    <form [formGroup]="customerForm" (ngSubmit)="(customerForm.valid)">
+      <div class="custom" fxHide fxShow.lt-md>
+        <div
+          fxLayout="row wrap"
+          fxLayoutGap="20px"
+          style="justify-content: flex-start;"
+          fxLayoutAlign="flex-start"
+        >
+          <!--  -->
+          <mat-form-field appearance="outline" class="input2">
+            <mat-label>Name</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="name"
+              placeholder="Enter your Name"
+              required
+              [(ngModel)]="addModel.name"
+            />
+          </mat-form-field>
+          <!------------------------ phoneNumber ------------------>
+
+          <mat-form-field appearance="outline" class="input2">
+            <mat-label>phoneNumber</mat-label>
+            <!-- <mat-error *ngIf="mobile.invalid">{{ phoneNumber() }}</mat-error> -->
+            <input
+              type="text"
+              matInput
+              formControlName="contact"
+              placeholder="Enter your phoneNumber"
+              required
+              [(ngModel)]="addModel.phoneNumber"
               autocomplete="off"
             />
           </mat-form-field>
         </div>
-      </div>
-      <br />
-      <div fxLayout="row" fxLayoutAlign="start center">Type</div>
-      <br />
-      <div fxLayout="column" fxLayoutAlign="start start">
-        <mat-radio-group
-          aria-label="Select an option"
-          fxLayoutGap="110px"
-          [disabled]="!fields"
-          (change)="onChange($event)"
-        >
-          <mat-radio-button [checked]="true" (click)="getaddress()" value="Home"
-            >Home</mat-radio-button
-          >
-          <mat-radio-button (click)="onwork()" value="Work"
-            >Work</mat-radio-button
-          >
-          <mat-radio-button (click)="onOther()" value="Other"
-            >Other</mat-radio-button
-          >
-        </mat-radio-group>
-      </div>
+        <!------------------------------- pincode ------------------------->
 
-      <div fxLayout="column" fxLayoutAlign="end end">
-        <button
-          mat-raised-button
-          *ngIf="!open2"
-          class="button"
-          (click)="onContinue()"
+        <div
+          fxLayout="row wrap"
+          fxLayoutGap="20px"
+          style="justify-content: flex-start;"
+          fxLayoutAlign="flex-start"
         >
-          Continue
-        </button>
+          <mat-form-field appearance="outline" class="input2">
+            <mat-label>pincode</mat-label>
+            <!-- <mat-error *ngIf="pincode.invalid">
+                        {{ pincodeValidation() }}</mat-error
+                      > -->
+            <input
+              type="text"
+              matInput
+              formControlName="pinCode"
+              placeholder="Enter your pincode"
+              required
+              [(ngModel)]="addModel.pincode"
+              autocomplete="off"
+            />
+          </mat-form-field>
+          <!---------------------------- locality ------------------------------------->
+
+          &nbsp;
+          <mat-form-field class="input2">
+            <mat-label>Country</mat-label>
+            <mat-select
+              (selectionChange)="selected($event)"
+              required
+              formControlName="country"
+            >
+              <mat-option value="india">
+                India
+              </mat-option>
+              <mat-option value="america">
+                America
+              </mat-option>
+              <mat-option value="other">
+                Others
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- </div> -->
+        </div>
+
+        <!-------------------------------- address ------------------------------------------>
+        <mat-form-field appearance="outline" style="width: 90%;">
+          <mat-label>Address</mat-label>
+
+          <input
+            type="text"
+            matInput
+            formControlName="address"
+            placeholder="Address"
+            required
+            [(ngModel)]="addModel.address"
+            style="height: 51px;"
+            autocomplete="off"
+          />
+        </mat-form-field>
+
+        <br />
+
+        <!---------------------------------- City ---------------------------------------->
+        <div
+          fxLayout="row wrap"
+          fxLayoutGap="20px"
+          style="justify-content: flex-start;"
+          fxLayoutAlign="flex-start"
+        >
+          <mat-form-field appearance="outline" class="input2">
+            <mat-label>City/town</mat-label>
+            <!-- <mat-error *ngIf="city.invalid">
+                          {{ cityValidation() }}</mat-error
+                        > -->
+            <input
+              type="text"
+              matInput
+              formControlName="city"
+              placeholder="Enter your city/town"
+              required
+              [(ngModel)]="addModel.city"
+              [disabled]="!fields"
+              autocomplete="off"
+            />
+          </mat-form-field>
+          <!----------------------------------- landmark ------------------------------------>
+
+          <mat-form-field appearance="outline" class="input2">
+            <mat-label>Landmark</mat-label>
+            <!-- <mat-error *ngIf="landmark.invalid">{{
+                            landmarkValidation()
+                          }}</mat-error> -->
+            <input
+              type="text"
+              matInput
+              formControlName="landMark"
+              [(ngModel)]="addModel.landmark"
+              autocomplete="off"
+            />
+          </mat-form-field>
+          <!-- </div> -->
+        </div>
+
+        <br />
+        <div fxLayout="row" fxLayoutAlign="start center">Type</div>
+        <br />
+        <div fxLayout="column" fxLayoutAlign="start start">
+          <mat-radio-group
+            aria-label="Select an option"
+            fxLayoutGap="110px"
+            style="margin-bottom: 10px;"
+            [disabled]="!fields"
+            (change)="onChange($event)"
+          >
+            <mat-radio-button (click)="getaddress()" value="Home"
+              >Home</mat-radio-button
+            >
+            <mat-radio-button (click)="onwork()" value="Work"
+              >Work</mat-radio-button
+            >
+            <mat-radio-button [checked]="true" (click)="onOther()" value="Other"
+              >Other</mat-radio-button
+            >
+          </mat-radio-group>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="end end">
+          <button
+            mat-raised-button
+            *ngIf="!open2"
+            class="button"
+            [disabled]="!customerForm.valid"
+            (click)="onContinue()"
+          >
+            Continue
+          </button>
+        </div>
       </div>
-    </div>
+    </form>
   </mat-card>
-
+  <!------------------------- orderSummery -------------------->
   <br />
   <mat-card class="mat2" *ngIf="!open2">
     <div>
@@ -258,25 +462,54 @@
 
   <mat-card class="matcard2" *ngIf="open2">
     <div class="mycart">Order summery</div>
+    <div>
+      <div *ngFor="let book of bookNquantityData">
+        <div *ngIf="book != null">
+          <div class="cartdetails" fxLayout="row" fxLayoutAlign="start start">
+            <img class="bookimg" src="{{ book.bookImage }}" />
+            <div class="bookdetails">
+              <div class="booktitle2">
+                {{ book.bookName }}
+              </div>
 
-    <div *ngFor="let book of bookNquantityData">
-      <div *ngIf="book.bookName != null">
-        <div class="cartdetails" fxLayout="row" fxLayoutAlign="start start">
-          <!-- <img class="bookimg" src="assets/images/Image 11@2x.png" /> -->
-          <img class="bookimg" src="{{ book.bookImage }}" />
-          <div class="bookdetails">
-            <div class="booktitle">
-              <!-- Don't Make Me Think -->
-              {{ book.bookName }}
-            </div>
+              <div class="sub2">{{ book.bookAuthor }}</div>
+              <div class="totalprice" fxLayout="row wrap">
+                Rs. {{ book.bookPrice }}
+              </div>
+              <!-- <div style="margin-bottom: 20px; font: Bold 18px/15px Lato;" >
+                Rs. {{ book.bookPrice }}
+              </div> -->
 
-            <div class="sub">{{ book.bookAuthor }}</div>
-            <div style="font: Bold 18px/15px Lato; margin-bottom: 30px;">
-              Rs. {{ book.totalPrice }}
+              <div
+                class="totalprice2"
+                fxLayout="row wrap"
+                fxLayoutGap="22px"
+                style="justify-content: flex-start;"
+                fxLayoutAlign="flex-start"
+                *ngFor="let quaty of book.quantitybto"
+              >
+                qty:{{ quaty.quantityOfBook }} &nbsp; Tp:{{ quaty.totalprice }}
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <div
+        fxLayout="column"
+        fxLayoutAlign="start end"
+        style="margin-bottom: 10px;"
+      >
+        Shipping charge : {{ shippingCharge }}
+      </div>
+      <mat-divider></mat-divider><br />
+    </div>
+
+    <div
+      fxLayout="column"
+      fxLayoutAlign="start end"
+      style="margin-bottom: 10px;"
+    >
+      Grand Total:{{ grandTotal }}
     </div>
     <div fxLayout="column" fxLayoutAlign="end end">
       <button mat-raised-button class="button" (click)="onCheckOut(book)">
@@ -286,6 +519,6 @@
   </mat-card>
   <br /><br />
 </div>
-<div style="top: 1024px; margin-bottom: 1%;" class="footer">
+<div style="top: 1024px; margin-bottom: 4%;" class="footer">
   <app-footer></app-footer>
 </div>

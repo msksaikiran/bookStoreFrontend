@@ -1,13 +1,12 @@
 .book {
   flex-direction: row;
-  padding: 10px;
-  padding-top: 30px;
+  padding: 15px;
+  padding-top: 34px;
 }
 .bookheader {
   flex-direction: row;
-  padding-bottom: 2%;
-  margin-left: 17%;
-  margin-right: 16.2%;
+  margin-left: 6%;
+  margin-right: 9%;
   position: relative;
   flex-wrap: wrap;
   display: block;
@@ -15,9 +14,11 @@
 }
 .sort {
   text-align: center;
-  font-size: 12px;
-  width: 161px;
-  height: 30px;
+  font-size: 11px;
+  // width: 161px;
+  // height: 30px;
+  width: 106%;
+  height: 7%;
   font: Regular 12px/15px Lato;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 1px solid #837070;
@@ -63,4 +64,18 @@ app-books {
 }
 .footer {
   margin-top: 4%;
+}
+@media (min-width: 728px) {
+  .bookheader {
+    margin-left: 15%;
+    margin-right: 16%;
+  }
+  .footer {
+    margin-right: 13%;
+  }
+}
+@media (max-width: 414px) {
+  .footer {
+    margin-right: 8%;
+  }
 }

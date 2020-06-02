@@ -1,0 +1,157 @@
+<mat-card-content>
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="bookheader">
+    <div style="font-size: 100%;" class="books">
+      Books
+      <small style="font-size: 12px;">( {{ length }} itmes)</small>
+    </div>
+    <!-- <div>
+      <button
+        class="sort"
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+        [matMenuTriggerFor]="menu"
+      >
+        <div
+          style="font-size: 11px; padding-bottom: 3%;"
+          (click)="doSorting(sort)">
+          <label>{{ sort }}</label>
+        </div>
+        <div>
+          <mat-icon style="color: #f80d29; opacity: 0.75;"
+            >expand_more</mat-icon
+          >
+        </div>
+      </button>
+      <mat-menu #menu="matMenu" class="myMenu"> -->
+    <div
+      style="width: 115px; height: auto; text-align: left; padding-left: 8px;"
+    >
+      <button class="box1" (click)="addbook()">
+        ADD BOOKS
+      </button>
+    </div>
+    <!--</mat-menu>
+    </div>-->
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <div fxLayout="row" class="display-notes">
+      <div *ngFor="let book of bookList" class="book">
+        <!--  -->
+        <mat-card
+          autocomplete="off"
+          role="combobox"
+          flex="column"
+          matTooltip="{{ book.bookDescription }}"
+          matTooltipPosition="right"
+          matTooltipClass="custom-tooltip"
+        >
+          <div class="header" style="background-color: #f5f5f5;">
+            <mat-card-header>
+              <div class="container">
+                <img
+                  mat-card-image
+                  fxLayoutAlign="center start"
+                  src="{{ book.bookImage }}"
+                  alt="Snow"
+                />
+                <button *ngIf="book.noOfBooks == 0" class="btn">
+                  OUT OF STOCK
+                </button>
+              </div>
+            </mat-card-header>
+          </div>
+          <div class="content">
+            <mat-card-content>
+              <div class="mat-title" fxLayoutAlign="center center">
+                {{ book.bookName }}
+              </div>
+              <!-- <mat-card-subtitle style="color: #9d9d9d; margin-top: -10px;"
+              >by {{ book.bookAuthor }}</mat-card-subtitle
+            > -->
+              <div class="mat-subheading-1" fxLayoutAlign="center center">
+                Rs. {{ book.bookPrice }}
+              </div>
+              <div
+                class="mat-subheading-2"
+                *ngIf="noOfBooks < 6 && noOfBooks > 0; else available"
+              >
+                Only {{ book.noOfBooks }} books are left
+              </div>
+              <ng-template #available>
+                <div class="mat-subheading-2" *ngIf="noOfBooks > 5">
+                  Available({{ book.noOfBooks }})
+                </div>
+              </ng-template>
+              <div class="mat-subheading-2" *ngIf="book.noOfBooks == 0">
+                Not available
+              </div>
+            </mat-card-content>
+            <mat-card-actions
+              fxLayoutGap="20px"
+              fxLayout="row"
+              fxLayoutAlign="center center"
+            >
+              <button class="box1" (click)="updatebook(book)">
+                UPDATE BOOK
+              </button>
+              <!-- <mat-icon class="material-icons color_green" >delete</mat-icon> -->
+            </mat-card-actions>
+          </div>
+        </mat-card>
+        <!--  -->
+        <!-- <app-books [book]="book"></app-books> -->
+      </div>
+    </div>
+    <div class="paginator" style="padding-top: 20px;" *ngIf="length > 8">
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <div>
+          <button
+            mat-mini-fab
+            [disabled]="page < 2"
+            (click)="previousPage()"
+            style="
+              border: #e2e2e2;
+              background: #ffffff 0% 0% no-repeat padding-box;
+              color: #0a0102;
+            "
+          >
+            <mat-icon>navigate_before</mat-icon>
+          </button>
+        </div>
+        <div class="pagenumber" fxLayout="row">
+          <div *ngFor="let page of pages">
+            <button
+              mat-icon-button
+              (click)="getAvailableBooksOfPage(page)"
+              style="margin-right: 10px; margin-left: 10px;"
+            >
+              {{ page }}
+            </button>
+          </div>
+        </div>
+        <div>
+          <button
+            [disabled]="page > endPage"
+            (click)="nextPage()"
+            mat-mini-fab
+            style="
+              border: #e2e2e2;
+              background: #ffffff 0% 0% no-repeat padding-box;
+              color: #0a0102;
+            "
+          >
+            <mat-icon>navigate_next</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer" *ngIf="bookList.length > 2; else foot">
+    <app-footer></app-footer>
+  </div>
+  <ng-template #foot>
+    <div class="foot" style="top: 720px; margin-top: 45%;">
+      <app-footer></app-footer>
+    </div>
+  </ng-template>
+</mat-card-content>

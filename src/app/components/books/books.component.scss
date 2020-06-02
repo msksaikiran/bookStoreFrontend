@@ -4,6 +4,11 @@ mat-card {
   margin: -10px;
   margin-left: 10px;
   border: 1px solid #e2e2e2;
+  box-shadow: 0 0 8px 8px #fff inset !important;
+}
+mat-card:hover {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+  color: none;
 }
 mat-card-header {
   width: 115.5%;
@@ -39,8 +44,7 @@ img {
 }
 button {
   width: 100%;
-  cursor: -webkit-grab;
-  cursor: grab;
+  cursor: pointer;
 }
 .mat-card-actions,
 .mat-card-content,
@@ -52,20 +56,12 @@ button {
   margin-left: 4px;
   font: Regular 10px/12px Lato;
 }
-
 .mat-subheading-1 {
   position: relative;
   margin: 0px;
   margin-left: 4px;
   padding-top: -7px;
   font: Bold 12px/15px Lato;
-}
-.mat-subheading-2 {
-  position: relative;
-  margin: 0px;
-  margin-left: 4px;
-  padding-top: 6px;
-  font: 14px/15px Lato;
 }
 .box1 {
   font-size: 11px;
@@ -79,17 +75,21 @@ button {
   height: 29px;
   margin-left: 4px;
 }
-.boxwhish {
-  font-size: 11px;
-  text-align: center;
-  border: 1px solid #9d9d9d;
-  font: Medium 11px/13px Lato;
-  background-color: #e6d4d4;
-  color: #0a0102;
-  border-radius: 3px;
+.boxx {
+  border: none;
   opacity: 1;
-  width: 83px;
-  height: 30px;
+  margin-left: 1px;
+  margin-bottom: 12px;
+  cursor: unset;
+  font-size: 14px;
+  text-align: center;
+  padding-top: 0.8px;
+  height: 20px;
+  width: fit-content !important;
+  padding-right: 1px;
+  border-radius: 3px;
+  color: white;
+  background-color: rgb(16, 136, 16);
 }
 .box {
   font-size: 11px;
@@ -156,8 +156,9 @@ button {
   opacity: 0.96;
   font: Medium 15px/18px Lato;
   letter-spacing: 0px;
-  color: #0b0203;
+  color: red;
   opacity: 1;
+  cursor: unset;
 }
 .boxOutOfStockWishList {
   font-size: 11px;
@@ -178,8 +179,22 @@ button {
   font: Regular 11px/13px Lato !important;
   letter-spacing: 0px;
   font-size: 12px;
-  border: #5e3e3e !important;
-  border-radius: 2px;
-  background-color: rgba(250, 246, 246, 0.932);
-  color: #0a0102 !important;
+  border: #e2e2e2 !important;
+  border-radius: 3px;
+  background-color: #fff;
+  color: #9d9d9d !important;
+  box-shadow: 0px 3px 6px #00000029 !important;
+  opacity: 1;
+  white-space: pre-line;
+}
+.inwish {
+  font-size: 11px;
+  text-align: center;
+  border: 1px solid #9d9d9d;
+  font: Medium 11px/13px Lato;
+  color: #0a0102;
+  border-radius: 3px;
+  opacity: 1;
+  width: 191px;
+  height: 29px;
 }

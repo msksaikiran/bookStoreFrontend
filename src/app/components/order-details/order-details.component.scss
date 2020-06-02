@@ -12,41 +12,47 @@
   top: 135px;
   left: 213px;
   width: 120px;
-  height: 62px;
+  //height: 62px;
   font-size: larger;
   font: bold;
 }
 .mycart2 {
-  top: 135px;
-  width: 130px;
   height: 35px;
+  margin-top: 12px;
 }
 .booktitle {
-  width: 161px;
+  width: 90%;
   text-align: left;
   letter-spacing: 0px;
   color: #0a0102;
   opacity: 1;
   display: flex;
-}
-.footer {
-  width: 150%;
+  margin-left: -25px;
 }
 .sub {
   color: #9d9d9d;
   opacity: 1;
   margin-bottom: 15%;
   margin-top: 5%;
+  margin-left: -25px;
 }
+
 .matcard2 {
+  // background: #ffffff 0% 0% no-repeat padding-box;
+  // display: flex;
+  // flex-direction: column;
+  // width: 55%;
+  // margin-bottom: 50px;
+  // border: 1px solid #9d9d9d;
+  // border-radius: 3px;
+  //opacity: 1.1;
   background: #ffffff 0% 0% no-repeat padding-box;
   display: flex;
   flex-direction: column;
-  width: 680px;
-  margin-bottom: 50px;
+  width: 64%;
+  padding-bottom: 4.2%;
   border: 1px solid #9d9d9d;
   border-radius: 3px;
-  //opacity: 1.1;
 }
 .button {
   font-size: 17px;
@@ -62,115 +68,33 @@
   width: 65px;
   height: 90px;
 }
-// .container {
-//   display: flex;
-//   position: relative;
-//   top: 112px;
-//   left: 177px;
-//   flex-direction: column;
-//   flex-wrap: wrap;
-//   margin-bottom: 120px;
-//   height: 100%;
-// }
-// .quantity {
-//   width: 50px;
-//   height: -12px;
-//   background: #ffffff 0% 0% no-repeat padding-box;
-//   border: 1px solid #dbdbdb;
-//   border-radius: 1px;
-//   opacity: 1;
-//   text-align: center;
-//   height: 25px;
-//   padding-top: 4px;
-// }
-// .color {
-//   background-color: #dbdbdb;
-// }
-// .quantitybuttons {
-//   background: #fafafa;
-//   opacity: 1;
-// }
-// .booktitle2 {
-//   width: 190px;
-//   text-align: left;
-//   letter-spacing: 0px;
-//   color: #0a0102;
-//   opacity: 1;
-//   margin-left: 17%;
-//   position: relative;
-// }
-// .mat {
-//   display: flex;
-//   flex-direction: column;
-//   width: 680px;
-//   border: 1px solid #9d9d9d;
-//   border-radius: 3px;
-//   //opacity: 1.1;
-// }
-// .mat2 {
-//   display: flex;
-//   flex-direction: column;
-//   width: 680px;
-//   margin-bottom: 100px;
-//   border: 1px solid #9d9d9d;
-//   border-radius: 3px;
-//   //opacity: 1.1;
-// }
-// .ordersummery {
-//   top: 135px;
-//   left: 213px;
-//   height: 73px;
-//   font-size: larger;
-// }
-// .matcard1 {
-//   background: #ffffff 0% 0% no-repeat padding-box;
-//   display: flex;
-//   flex-direction: column;
-//   width: 680px;
-//   border: 1px solid #9d9d9d;
-//   border-radius: 3px;
-//   //opacity: 1;
-// }
-// .matcardincr {
-//   background: #ffffff 0% 0% no-repeat padding-box;
-//   display: flex;
-//   flex-direction: column;
-//   width: 680px;
-//   padding-bottom: 4.2%;
-//   border: 1px solid #9d9d9d;
-//   border-radius: 3px;
-//   //opacity: 1;
-// }
-
-// .address {
-//   width: 512px;
-//   height: 80px;
-// }
-
-// .input {
-//   width: 251px;
-//   height: 69px;
-// }
-// .fieldtop {
-//   margin-top: 21px;
-//   margin-left: 36px;
-// }
-
-// .checkout {
-//   border-radius: 3px;
-//   opacity: 1;
-//   margin-left: 86%;
-//   position: inherit;
-// }
-// .custom {
-//   margin-top: 21px;
-//   margin-left: 36px;
-// }
-
-// .editbutton {
-//   margin-left: 714px;
-//   margin-top: -21px;
-//   border: none;
-//   outline: none;
-//   background-color: #ffff;
-// }
+.totalprice {
+  font: Bold 18px/15px Lato;
+  margin-bottom: 30px;
+}
+@media (min-width: 728px) {
+  .footer {
+    margin-right: 13%;
+  }
+  .foot {
+    margin-top: 760px;
+    margin-right: 13%;
+  }
+}
+@media (min-width: 1024px) {
+  .footer {
+    margin-right: 13%;
+  }
+  .foot {
+    margin-right: 13%;
+  }
+}
+@media (max-width: 414px) {
+  .footer {
+    margin-right: 12%;
+  }
+  .foot {
+    margin-top: 450px;
+    margin-right: 8%;
+  }
+}
