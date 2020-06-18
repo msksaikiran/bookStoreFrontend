@@ -337,7 +337,7 @@ export class ViewCartComponent implements OnInit {
 
   getaddress() {
     this.addressService
-      .getRequest(environment.cart_home_address)
+      .getRequest("address/getAddresstype/home")
       .subscribe((Response: any) => {
         //console.log(Response);
         if (Response.obj != null) {
