@@ -16,4 +16,5 @@ export class Seller {
   public isListed: boolean;
   public totalPrice: any;
   public bookcountincart: number;
+  public quantity: any;
 }

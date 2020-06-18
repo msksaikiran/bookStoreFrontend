@@ -3,7 +3,7 @@
   <mat-card class="matcard2">
     <div class="mycart">My Orders&nbsp;({{ count }})</div>
     <div *ngFor="let book of myDatas">
-      <div *ngIf="book.bookName != null">
+      <div *ngIf="book != null">
         <div class="mycart2">OrderId:&nbsp; {{ book.orderId }}</div>
 
         <div class="cartdetails" fxLayout="row" fxLayoutAlign="start start">
@@ -14,9 +14,12 @@
             </div>
 
             <div class="sub">{{ book.bookAuthor }}</div>
-            <!-- <div style="font: Bold 18px/15px Lato; margin-bottom: 30px;">
-              Rs. {{ book.totalPrice }}
-            </div> -->
+            <div style="margin-left: -25px; margin-bottom: 6%;">
+              Rs.{{ book.bookPrice }}
+            </div>
+            <div class="totalprice2">
+              qty:{{ book.quantity }} &nbsp;Tp:{{ book.totalPrice }}
+            </div>
           </div>
         </div>
       </div>

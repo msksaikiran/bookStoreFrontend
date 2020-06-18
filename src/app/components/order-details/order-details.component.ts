@@ -29,10 +29,6 @@ export class OrderDetailsComponent implements OnInit {
   token: String;
   books: Array<Book> = [];
   book: Book = new Book();
-
-  quantitylist: [];
-
-  //bookincart: number;
   myDatas = new Array();
   bookcount: number;
 
@@ -43,24 +39,27 @@ export class OrderDetailsComponent implements OnInit {
       .getRequest(environment.orderlist_books + localStorage.getItem("token"))
       .subscribe(
         (Response: any) => {
-          //console.log(Response);
+          console.log(Response.obj);
           for (var len in Response.obj) {
-            this.count += 1;
             this.books = Response.obj[len];
 
             let res = this.books["booksList"];
-            this.myDatas.push(this.books["booksList"]);
+            let qt = this.books["quantityOfBooks"];
+
             /**
-             * bookdetails
+             * bookdetails and its quantity details
              */
+
             for (var index in res) {
+              this.count += 1;
               this.book = res[index]; //book details
               this.book.orderId = this.books["orderId"];
-              this.book.totalPrice = this.books["totalPrice"];
+              this.book.totalPrice = qt[index]["totalprice"];
+              this.book.quantity = qt[index]["quantityOfBook"];
               this.myDatas.push(this.book);
             }
           }
-          //console.log(this.myDatas);
+          console.log(this.myDatas);
         },
         (error: any) => {
           this.snackbar.open(error.error.message, "undo", { duration: 2500 });

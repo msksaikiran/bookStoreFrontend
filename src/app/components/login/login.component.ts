@@ -6,15 +6,12 @@ import {
   FormBuilder,
 } from "@angular/forms";
 import { Login } from "src/app/models/login";
-import {
-  MatSnackBar,
-  MatRadioChange,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from "@angular/material";
+import { MatSnackBar, MAT_DIALOG_DATA } from "@angular/material";
+import { MatDialogRef } from "@angular/material";
 import { ActivatedRoute, Router } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 import { HttpService } from "src/app/service/http.service";
+import { DataService } from "src/app/service/data.service";
 
 @Component({
   selector: "app-login",
@@ -48,9 +45,9 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private spinner: NgxSpinnerService,
     private httpservice: HttpService,
-    public dialogRef: MatDialogRef<LoginComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+    private data: DataService // @Inject(MAT_DIALOG_DATA) public data: any
+  ) //public dialogRef: MatDialogRef<LoginComponent>
+  {}
 
   ngOnInit() {}
   /**
@@ -88,7 +85,6 @@ export class LoginComponent implements OnInit {
           (response: any) => {
             if (response.status == 200) {
               this.spinner.hide();
-
               this.token = localStorage.getItem("token");
               console.log(this.token);
               this.snackBar.open("Login Successfull", "undo", {
@@ -96,16 +92,16 @@ export class LoginComponent implements OnInit {
               });
               if (this.favoriteSeason == "user") {
                 localStorage.setItem("token", response.obj);
-                this.dialogRef.close();
+
                 this.router.navigate(["books"]);
               }
               if (this.favoriteSeason == "seller") {
                 localStorage.setItem("token", response.obj);
-                this.dialogRef.close();
+
                 this.router.navigate(["seller/books"]);
               } else if (this.favoriteSeason == "admin") {
                 localStorage.setItem("token", response.obj);
-                this.dialogRef.close();
+
                 this.router.navigate(["admin/books"]);
               }
             } else {

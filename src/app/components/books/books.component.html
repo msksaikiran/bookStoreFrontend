@@ -17,16 +17,17 @@
           (click)="ratingAndReviews(book)"
         />
         <button *ngIf="book.noOfBooks == 0" class="btn">
-          OUT OF STOCK
+          <strong>OUT OF STOCK</strong>
         </button>
         <button
           *ngIf="noOfBooks < 6 && noOfBooks > 1; else available"
           class="btn"
+          style="color: green;"
         >
-          Hurry! only {{ book.noOfBooks }} books are left
+          <strong>Hurry! only {{ book.noOfBooks }} books are left</strong>
         </button>
         <button *ngIf="noOfBooks == 1; else available" class="btn">
-          Hurry! only {{ book.noOfBooks }} book is left
+          <strong>Hurry! only {{ book.noOfBooks }} book is left</strong>
         </button>
       </div>
     </mat-card-header>
@@ -47,9 +48,15 @@
       (click)="ratingAndReviews(book)"
       style="margin-bottom: -0.5%; margin-top: -1%; padding: 0 34px 0 4px;"
     >
-      <button *ngIf="totalRate > 0" class="boxx" fxLayout="row">
+      <button
+        *ngIf="totalRate > 0"
+        class="boxx"
+        fxLayout="row"
+        style="opacity: 1;"
+        [ngStyle]="{ 'background-color': color }"
+      >
         <div>
-          {{ totalRate }}
+          {{ total }}
         </div>
         <mat-icon style="font-size: 14px; padding-top: 1.8px;">
           star
@@ -58,9 +65,14 @@
       <button
         class="boxx"
         *ngIf="totalRate == 0"
-        style="padding-right: 6px; box-shadow: aliceblue;"
+        style="
+          padding-right: 6px;
+          box-shadow: rgb(171, 182, 75) !important;
+          background-color: rgb(118, 211, 126);
+          color: black;
+        "
       >
-        New
+        <strong>New</strong>
       </button>
     </mat-card-actions>
     <mat-card-actions fxLayout="row" fxLayoutGap="7%">

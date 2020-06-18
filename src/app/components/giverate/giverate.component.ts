@@ -12,7 +12,7 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class GiverateComponent implements OnInit {
   @Input("starCount") private starCount: number = 5;
-  @Input("color") private color: string;
+  color: string;
   private snackBarDuration: number = 2000;
   private ratingArr = [];
   rating: number;
@@ -32,9 +32,9 @@ export class GiverateComponent implements OnInit {
       this.ratingArr.push(index);
     }
     this.totalRate = localStorage.getItem("totalRate");
+    this.getColor();
   }
   onClick(rating: any) {
-    console.log(rating);
     this.snackBar.open("You rated " + rating + " / " + this.starCount, "", {
       duration: this.snackBarDuration,
     });
@@ -48,9 +48,17 @@ export class GiverateComponent implements OnInit {
       return "star_border";
     }
   }
+  bookImage: any;
+  bookName: any;
+  bookAuthor: any;
   getBookById() {
     this.bookService.getBookById(this.bookId).subscribe((response: any) => {
-      this.book = response["obj"];
+      if (response["obj"] != null) {
+        this.book = response.obj;
+        this.bookImage = response.obj["bookImage"];
+        this.bookAuthor = response.obj["bookAuthor"];
+        this.bookName = response.obj["bookName"];
+      }
     });
   }
   submitRate() {
@@ -65,5 +73,16 @@ export class GiverateComponent implements OnInit {
       .subscribe((response: any) => {
         this.snackBar.open("Thank you..", "ok", { duration: 1000 });
       });
+  }
+  getColor() {
+    if (this.totalRate >= 3 || this.totalRate >= 2) {
+      this.color = "rgb(245,182,110)";
+    }
+    if (this.totalRate >= 4) {
+      this.color = "rgb(16,136,16)";
+    }
+    if (this.totalRate < 2) {
+      this.color = "rgb(250,0,0)";
+    }
   }
 }

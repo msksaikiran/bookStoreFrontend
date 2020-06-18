@@ -1,6 +1,6 @@
 .rating-container {
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 20%;
+  margin-right: 20%;
 }
 @media (min-width: 728px) {
   .footer {
@@ -19,13 +19,22 @@
   .rate-submit {
     margin-left: 50% !important;
   }
+  .rating-container {
+    margin-left: -2% !important;
+    .singlecard {
+      width: 126% !important;
+    }
+    .twocards {
+      width: 275px !important;
+    }
+  }
 }
 button {
   height: 20px;
   width: 25px;
   line-height: 20px;
   mat-icon {
-    color: rgb(238, 175, 58);
+    color: rgb(255, 196, 0);
   }
 }
 .bookimg {
@@ -33,7 +42,7 @@ button {
   height: 150px;
 }
 .twocards {
-  width: 365px;
+  width: 340px;
 }
 mat-card {
   border: 1px solid #e2e2e2;
@@ -44,20 +53,15 @@ mat-card {
   flex-wrap: wrap;
   display: block;
   align-items: flex-start;
-  // float: left;
   justify-content: center;
-  margin-left: 10%;
-  margin-right: 10%;
 }
 .rating {
   margin-top: 4%;
   margin-left: -1%;
 }
 .singlecard {
-  margin-left: 10%;
-  margin-right: 10%;
   margin-top: 2%;
-  width: 80%;
+  width: 100%;
 }
 .reviewtext {
   textarea {
@@ -67,7 +71,7 @@ mat-card {
   }
 }
 .rate-submit {
-  margin-left: 70%;
+  margin-left: 85%;
   margin-top: 10px;
   height: 40px;
   width: 70px;
@@ -86,6 +90,5 @@ mat-card {
   border-radius: 3px;
   border: none;
   color: white !important;
-  background-color: rgb(16, 136, 16);
   margin-top: 5%;
 }

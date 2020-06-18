@@ -94,7 +94,7 @@ const routes: Routes = [
         component: OrderDetailsComponent,
       },
       {
-        path: "books/rating/:bookId",
+        path: "books/details/:bookId",
         component: RatingreviewComponent,
       },
       {

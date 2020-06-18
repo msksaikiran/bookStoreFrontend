@@ -1,6 +1,6 @@
 .cartdetails {
   display: flex;
-  margin-left: 36px;
+  margin-left: 2%;
   position: relative;
 }
 .bookdetails {
@@ -14,6 +14,7 @@
   width: 120px;
   //height: 62px;
   font-size: larger;
+  margin-bottom: 10px;
   font: bold;
 }
 .mycart2 {
@@ -21,7 +22,7 @@
   margin-top: 12px;
 }
 .booktitle {
-  width: 90%;
+  width: 130%;
   text-align: left;
   letter-spacing: 0px;
   color: #0a0102;
@@ -32,7 +33,7 @@
 .sub {
   color: #9d9d9d;
   opacity: 1;
-  margin-bottom: 15%;
+  margin-bottom: 10%;
   margin-top: 5%;
   margin-left: -25px;
 }
@@ -65,12 +66,16 @@
 .bookimg {
   top: 192px;
   left: 213px;
-  width: 65px;
-  height: 90px;
+  width: 70px;
+  height: 107px;
 }
 .totalprice {
   font: Bold 18px/15px Lato;
   margin-bottom: 30px;
+}
+.totalprice2 {
+  //margin-bottom: 30px;
+  margin-left: -25px;
 }
 @media (min-width: 728px) {
   .footer {

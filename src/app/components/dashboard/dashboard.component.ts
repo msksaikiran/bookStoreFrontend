@@ -54,9 +54,6 @@ export class DashboardComponent implements OnInit {
     this.getcountofbooks();
     this.getprofileLink();
     this.profile = localStorage.getItem("userimage");
-    // this.books.countMessage.subscribe((response) => {
-    // (this.bookcount = response), console.log(this.bookcount);
-    // });
   }
 
   onBook() {
@@ -101,7 +98,8 @@ export class DashboardComponent implements OnInit {
 
   onLogin() {
     const dialogRef = this.dialog.open(LoginComponent);
-    dialogRef.afterClosed().subscribe((result) => {
+
+    dialogRef.afterClosed().subscribe(() => {
       window.location.reload();
     });
   }
@@ -181,7 +179,7 @@ export class DashboardComponent implements OnInit {
           localStorage.setItem("userprofile", response["msg"]);
           this.profilepic = true;
           this.profile = response["msg"];
-          console.log("upload", response);
+          ///  console.log("upload", response);
         });
     }
   }

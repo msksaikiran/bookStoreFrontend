@@ -224,6 +224,7 @@ export class ViewCartComponent implements OnInit {
           }
         },
         (error: any) => {
+          this.spinner.hide();
           this.snackbar.open(error.error.message, "undo", { duration: 1000 });
         }
       );
@@ -284,6 +285,7 @@ export class ViewCartComponent implements OnInit {
             });
           },
           (error: any) => {
+            this.spinner.hide();
             this.snackbar.open(error.error.message, "undo", { duration: 1000 });
           }
         );
@@ -327,6 +329,7 @@ export class ViewCartComponent implements OnInit {
           }, 2000);
         },
         (error: any) => {
+          this.spinner.hide();
           this.snackbar.open(error.error.message, "undo", { duration: 2500 });
         }
       );

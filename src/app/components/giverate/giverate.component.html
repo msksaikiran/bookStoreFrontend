@@ -1,24 +1,26 @@
 <div role="combobox" flex="column" class="rating-container">
   <div fxLayout="row" class="giverating" fxLayoutAlign="space-between stretch">
-    <mat-card style="margin-bottom: 20px;">
+    <mat-card>
       <div fxLayout="row" class="twocards">
         <div>
-          <img class="bookimg" src="{{ book.bookImage }}" />
+          <img class="bookimg" src="{{ bookImage }}" />
         </div>
         <div fxLayout="column" style="margin-left: 20px;">
           <div
             class="booktitle"
             style="word-wrap: break-word; margin-bottom: 5%; font-size: 20px;"
           >
-            <Strong>{{ book.bookName }}</Strong>
+            <Strong>{{ bookName }}</Strong>
           </div>
           <div class="sub" style="word-wrap: break-word; margin-bottom: 5%;">
-            by {{ book.bookAuthor }}
+            by {{ bookAuthor }}
           </div>
           <div>
             <button
+              *ngIf="totalRate > 0"
               class="single"
               fxLayout="row"
+              [ngStyle]="{ 'background-color': color }"
             >
               <div>
                 {{ totalRate }}
@@ -60,7 +62,7 @@
       </div>
     </mat-card>
   </div>
-  <div fxLayout="column" style="margin-top: 3%;" class="singlecard">
+  <div fxLayout="column" class="singlecard">
     <mat-card>
       <div style="margin-bottom: 2%;">
         <strong>Review the Book</strong>

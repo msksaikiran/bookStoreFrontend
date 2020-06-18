@@ -112,10 +112,11 @@ export class BooksComponent implements OnInit {
     }
   }
   ratingAndReviews(book: any) {
-    this.router.navigate(["books/rating/" + book.bookId]);
+    this.router.navigate(["books/details/" + book.bookId]);
   }
   rate: Rating;
   color: any;
+  total: any;
   getTotalRating() {
     this.bookService
       .getratingandreview(this.book.bookId)
@@ -124,10 +125,12 @@ export class BooksComponent implements OnInit {
         for (var index in this.ratingArr) {
           this.rate = this.ratingArr[index];
           this.totalRate += this.rate.rating;
+          this.total = this.totalRate;
           this.ratenumber += 1;
         }
         if (this.ratenumber > 1) {
           this.totalRate = this.totalRate / this.ratenumber;
+          this.total = Number.parseFloat(this.totalRate + "").toFixed(1);
         }
         if (this.totalRate >= 3 || this.totalRate >= 2) {
           this.color = "rgb(245, 182, 110)";
@@ -136,7 +139,7 @@ export class BooksComponent implements OnInit {
           this.color = "rgb(16, 136, 16)";
         }
         if (this.totalRate < 2) {
-          this.color = "rgb(216, 69, 59)";
+          this.color = "rgb(250, 0, 0)";
         }
       });
   }
