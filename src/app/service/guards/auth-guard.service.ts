@@ -10,7 +10,6 @@ import {
   CanActivateChild,
 } from "@angular/router";
 import { Observable } from "rxjs";
-import decode from "jwt-decode";
 import { MatSnackBar, MatDialog } from "@angular/material";
 import { LoginComponent } from "src/app/components/login/login.component";
 
@@ -37,7 +36,7 @@ export class AuthGuardService implements CanActivate {
     if (this._authService.isAuthenticated()) {
       //validating the token by decoding.
       try {
-        decode(localStorage.getItem("token"));
+        // decode(localStorage.getItem("token"));
       } catch (error) {
         this.snackBar.open("Login Failed Invaid token", "undo", {
           duration: 25000,
